@@ -1,48 +1,135 @@
 import React from 'react';
-import { Heart } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin, Facebook, Instagram, Globe, Sparkles, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
     return (
-        <footer className="bg-primary-dark text-white py-12">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
-                    <div className="col-span-1 md:col-span-2">
-                        <img
-                            src={logo}
-                            alt="FONDATION AP LUMIÈRE D'AFRIQUE"
-                            className="h-24 w-auto object-contain mb-4"
-                        />
-                        <p className="text-gray-300 max-w-sm">
-                            "Là où brille la lumière, renaît l'espérance. Chaque geste compte, chaque vie compte." </p>
+        <footer className="relative bg-slate-900 text-white pt-24 pb-12 overflow-hidden">
+            {/* Decorations */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div className="container-custom relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+                    {/* Brand Info */}
+                    <div className="lg:col-span-5 space-y-8">
+                        <Link to="/" className="inline-block group">
+                            <div className="flex items-center gap-4">
+                                <img
+                                    src={logo}
+                                    alt="Logo"
+                                    className="h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-105 brightness-0 invert"
+                                />
+                                <div className="border-l border-white/20 pl-4 py-1">
+                                    <h2 className="text-xl md:text-2xl font-black font-heading leading-none tracking-tight text-white">
+                                        LUMIÈRE D'AFRIQUE
+                                    </h2>
+                                    <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mt-2 text-white/50">
+                                        Fondation Humanitaire
+                                    </p>
+                                </div>
+                            </div>
+                        </Link>
+
+                        <p className="text-white/60 text-lg leading-relaxed max-w-md font-medium italic">
+                            "Là où brille la lumière, renaît l'espérance. Chaque geste compte, chaque vie compte pour bâtir un avenir meilleur."
+                        </p>
+
+                        <div className="flex items-center gap-4">
+                            {[
+                                { icon: Facebook, href: "https://www.facebook.com/p/Fondation-AP-100068524751516/" },
+                                { icon: Music, href: "https://www.tiktok.com/@apoutchou_national1" },
+                                { icon: Instagram, href: "https://www.instagram.com/apoutchou_national_24/" },
+                            ].map((social, idx) => (
+                                <a
+                                    key={idx}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-all transform hover:-translate-y-1"
+                                >
+                                    <social.icon size={20} />
+                                </a>
+                            ))}
+                        </div>
                     </div>
 
-                    <div>
-                        <h4 className="font-bold mb-4 text-lg">Liens Rapides</h4>
-                        <ul className="space-y-2 text-gray-300">
-                            <li><Link to="/" className="hover:text-accent transition-colors">Accueil</Link></li>
-                            <li><a href="#about" className="hover:text-accent transition-colors">À Propos</a></li>
-                            <li><a href="#actions" className="hover:text-accent transition-colors">Nos Actions</a></li>
-                            <li><a href="#projects" className="hover:text-accent transition-colors">Projets</a></li>
-                        </ul>
-                    </div>
+                    {/* Links Grid */}
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-12">
+                        {/* Navigation */}
+                        <div>
+                            <h4 className="text-lg font-black font-heading mb-8 flex items-center gap-2">
+                                <Sparkles size={18} className="text-accent" />
+                                Navigation
+                            </h4>
+                            <ul className="space-y-4">
+                                {[
+                                    { name: 'Accueil', path: '/' },
+                                    { name: 'À Propos', path: '/apropos' },
+                                    { name: 'Nos Actions', path: '/actions' },
+                                    { name: 'Actualités', path: '/actualites' },
+                                    { name: 'Faire un don', path: '/contact' }
+                                ].map((link) => (
+                                    <li key={link.name}>
+                                        <Link to={link.path} className="text-white/50 hover:text-accent font-bold transition-colors flex items-center gap-2 group">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-accent scale-0 group-hover:scale-100 transition-transform" />
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                    <div>
-                        <h4 className="font-bold mb-4 text-lg">Légal</h4>
-                        <ul className="space-y-2 text-gray-300">
-                            <li><a href="#" className="hover:text-accent transition-colors">Mentions Légales</a></li>
-                            <li><Link to="/privacy" className="hover:text-accent transition-colors">Confidentialité</Link></li>
-                        </ul>
+                        {/* Contact */}
+                        <div className="sm:col-span-2">
+                            <h4 className="text-lg font-black font-heading mb-8 flex items-center gap-2">
+                                <Globe size={18} className="text-accent" />
+                                Nous Trouver
+                            </h4>
+                            <div className="space-y-6">
+                                <div className="flex gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 text-accent">
+                                        <MapPin size={20} />
+                                    </div>
+                                    <p className="text-white/60 font-medium">Angré Caféier 3, Abidjan, Côte d'Ivoire</p>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 text-accent">
+                                        <Mail size={20} />
+                                    </div>
+                                    <p className="text-white/60 font-medium">contact@fondation-ap.org</p>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 text-accent">
+                                        <Phone size={20} />
+                                    </div>
+                                    <p className="text-white/60 font-medium">07 08 31 70 38</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="text-center text-gray-400 text-sm flex flex-col md:flex-row items-center justify-center gap-2">
-                    <span>© 2025 Fondation AP Lumière d'Afrique. Tous droits réservés.</span>
-                    <span className="hidden md:inline">•</span>
-                    <span className="flex items-center gap-1">
-                        Fait avec <Heart size={14} className="text-accent fill-accent" /> pour la jeunesse
-                    </span>
+                {/* Bottom Bar */}
+                <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.3em] order-2 md:order-1">
+                        &copy; 2026 Fondation AP Lumière d'Afrique — Tous droits réservés
+                    </p>
+
+                    <div className="flex items-center gap-8 order-1 md:order-2">
+                        <Link to="/privacy" className="text-white/40 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
+                            Confidentialité
+                        </Link>
+                        <Link to="/legal" className="text-white/40 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
+                            Mentions Légales
+                        </Link>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-[0.2em] order-3">
+                        Crafted with <Heart size={12} className="text-accent fill-accent" /> for impact
+                    </div>
                 </div>
             </div>
         </footer>

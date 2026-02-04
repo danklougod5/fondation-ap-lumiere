@@ -1,26 +1,91 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Sparkles, Heart, Crown, Building2, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Partners = () => {
+    // Using typographic logos since we don't have official SVGs, 
+    // creating a consistent and premium look.
+    const partners = [
+        { name: "Ministère de la Solidarité", icon: Building2 },
+        { name: "Fondation Magic System", icon: Sparkles },
+        { name: "Roi 12-12", icon: Crown },
+        { name: "Mairie de Cocody", icon: Building2 },
+        { name: "UNESCO Afrique", icon: Users },
+        { name: "Union Européenne", icon: Sparkles },
+    ];
+
+    // Double the list for seamless infinite scroll
+    const marqueeList = [...partners, ...partners];
+
     return (
-        <section className="py-16 bg-white border-b border-gray-100">
-            <div className="container mx-auto px-4 text-center">
-                <h3 className="text-xl font-semibold text-gray-500 mb-8 uppercase tracking-widest">
-                    Ils nous soutiennent
-                </h3>
+        <section className="py-24 bg-slate-900 overflow-hidden relative">
+            {/* Background Gradients */}
+            <div className="absolute top-0 left-0 w-64 h-full bg-gradient-to-r from-slate-900 to-transparent z-10"></div>
+            <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-slate-900 to-transparent z-10"></div>
 
-                <div className="flex flex-wrap justify-center items-center gap-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                    {/* Partner Placeholders (Text based for now as no logos were provided) */}
-                    <div className="text-2xl font-bold text-gray-400">Ministère de la Solidarité</div>
-                    <div className="text-2xl font-bold text-gray-400">Fondation Magic System</div>
-                    <div className="text-2xl font-bold text-gray-400">Roi 12-12</div>
-                    <div className="text-2xl font-bold text-gray-400">Mairie de Cocody</div>
-                </div>
+            <div className="container-custom relative z-20 text-center mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <span className="text-accent font-black uppercase tracking-[0.3em] text-xs mb-4 block">
+                        Partenaires Officiels
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-black text-white font-heading">
+                        ILS NOUS <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">SOUTIENNENT</span>
+                    </h2>
+                </motion.div>
+            </div>
 
-                <div className="mt-12 bg-gray-50 inline-block px-8 py-4 rounded-full border border-gray-200">
-                    <p className="font-medium text-gray-700">
-                        Rejoignez la communauté des <span className="text-primary font-bold">"Missionnaires"</span> d'Apoutchou National
-                    </p>
-                </div>
+            {/* Infinite Marquee */}
+            <div className="relative w-full overflow-hidden py-10">
+                <motion.div
+                    className="flex gap-16 md:gap-24 w-max"
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{
+                        duration: 30,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                >
+                    {marqueeList.map((partner, index) => (
+                        <div key={index} className="flex items-center gap-4 group cursor-default">
+                            {/* Icon Placeholder */}
+                            <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 group-hover:text-accent group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300">
+                                <partner.icon size={20} />
+                            </div>
+                            {/* Text Logo */}
+                            <span className="text-2xl md:text-3xl font-black text-white/30 whitespace-nowrap group-hover:text-white transition-colors duration-300 font-heading tracking-tight">
+                                {partner.name}
+                            </span>
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="container-custom relative z-20 mt-16 flex justify-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="relative group"
+                >
+                    <div className="absolute -inset-1 bg-gradient-to-r from-accent via-primary to-accent rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <Link
+                        to="/contact"
+                        className="relative px-8 py-4 bg-slate-800 rounded-full leading-none flex items-center gap-4 border border-white/10 hover:bg-slate-800/80 transition-colors"
+                    >
+                        <span className="text-slate-200 font-medium">
+                            Rejoignez la communauté des <span className="text-white font-black text-lg">"Missionnaires"</span> d'Apoutchou National
+                        </span>
+                        <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-slate-900 group-hover:scale-110 transition-transform">
+                            <Heart size={16} fill="currentColor" />
+                        </div>
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );

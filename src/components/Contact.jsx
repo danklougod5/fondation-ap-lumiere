@@ -1,110 +1,156 @@
-import React from 'react';
-import { MapPin, Mail, Phone, Facebook, Instagram, Youtube, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Send, Phone, Mail, MapPin, Sparkles, Heart, ArrowRight } from 'lucide-react';
 
 const Contact = () => {
+    const [status, setStatus] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setStatus('sending');
+        setTimeout(() => {
+            setStatus('success');
+            setTimeout(() => setStatus(''), 5000);
+        }, 1500);
+    };
+
     return (
-        <section id="contact" className="py-20 bg-gray-50">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col lg:flex-row gap-12">
+        <section id="contact" className="section-padding bg-white relative overflow-hidden">
+            {/* Background Decorations */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] -mr-64 -mt-64"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -ml-40 -mb-40"></div>
 
-                    {/* Contact Info & Map */}
-                    <div className="lg:w-1/2 space-y-8" data-aos="fade-right">
-                        <div>
-                            <h2 className="text-3xl font-bold font-heading text-primary-dark mb-4">
-                                Contactez-nous
-                            </h2>
-                            <p className="text-gray-600 mb-8">
-                                Vous souhaitez devenir bénévole, faire un don ou proposer un partenariat ?
-                                Notre équipe est à votre écoute.
-                            </p>
+            <div className="container-custom relative z-10">
+                <div className="grid lg:grid-cols-2 gap-20 items-center">
+                    {/* Left: Info */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest mb-6 border border-primary/20">
+                            <Sparkles size={14} />
+                            Contact
                         </div>
+                        <h2 className="mb-8">
+                            Rejoignez le <span className="text-primary italic">Mouvement</span>
+                        </h2>
+                        <p className="text-slate-500 text-lg font-medium leading-relaxed mb-12">
+                            Une question ? Une envie de devenir missionnaire de la lumière ou un partenaire ? Notre équipe est à votre écoute.
+                        </p>
 
-                        <div className="space-y-6">
-                            <div className="flex items-start gap-4">
-                                <div className="bg-white p-3 rounded-full shadow-sm text-accent">
-                                    <MapPin size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-gray-800">Adresse</h4>
-                                    <p className="text-gray-600">Angré Caféier 3, Deux-Plateaux-Angré<br />Cocody, Abidjan</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4">
-                                <div className="bg-white p-3 rounded-full shadow-sm text-accent">
-                                    <Mail size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-gray-800">Email</h4>
-                                    <p className="text-gray-600">contact@fondationaplumiere.org</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4">
-                                <div className="bg-white p-3 rounded-full shadow-sm text-accent">
+                        <div className="space-y-8">
+                            <div className="flex gap-6 group">
+                                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 border border-slate-100 shadow-sm">
                                     <Phone size={24} />
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-gray-800">Téléphone</h4>
-                                    <p className="text-gray-600">+225 07 00 00 00 00</p>
+                                    <h4 className="text-lg font-black text-slate-900 mb-1">Téléphone</h4>
+                                    <p className="text-slate-500 font-bold tracking-wide">07 08 31 70 38</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-6 group">
+                                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 border border-slate-100 shadow-sm">
+                                    <Mail size={24} />
+                                </div>
+                                <div>
+                                    <h4 className="text-lg font-black text-slate-900 mb-1">Email</h4>
+                                    <p className="text-slate-500 font-bold tracking-wide">contact@fondation-ap.org</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-6 group">
+                                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 border border-slate-100 shadow-sm">
+                                    <MapPin size={24} />
+                                </div>
+                                <div>
+                                    <h4 className="text-lg font-black text-slate-900 mb-1">Siège</h4>
+                                    <p className="text-slate-500 font-bold tracking-wide">Angré Caféier 3, Abidjan, Côte d'Ivoire</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-8">
-                            <h4 className="font-bold text-gray-800 mb-4">Suivez-nous</h4>
-                            <div className="flex gap-4">
-                                <a href="#" className="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition-colors"><Facebook size={20} /></a>
-                                <a href="#" className="bg-pink-600 text-white p-3 rounded-full hover:bg-pink-700 transition-colors"><Instagram size={20} /></a>
-                                <a href="#" className="bg-red-600 text-white p-3 rounded-full hover:bg-red-700 transition-colors"><Youtube size={20} /></a>
+                        <div className="mt-16 p-8 bg-slate-900 rounded-[2.5rem] text-white relative overflow-hidden shadow-2xl">
+                            <div className="relative z-10">
+                                <h4 className="text-xl font-black mb-4 flex items-center gap-2 text-white">
+                                    <Heart size={20} className="text-accent" />
+                                    Urgence Humanitaire
+                                </h4>
+                                <p className="text-white/60 mb-8 font-medium italic">Besoin d'une assistance immédiate pour un cas critique ?</p>
+                                <a href="tel:0708317038" className="inline-flex items-center gap-3 text-accent font-black uppercase text-xs tracking-[0.2em] group">
+                                    Appel Prioritaire
+                                    <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+                                </a>
                             </div>
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Donation Form */}
-                    <div id="donate" className="lg:w-1/2 bg-white p-8 rounded-2xl shadow-xl" data-aos="fade-left">
-                        <h3 className="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
-                            <span className="bg-accent text-white p-2 rounded-lg"><Send size={20} /></span>
-                            Faire un Don / Message
-                        </h3>
-
-                        <form className="space-y-4">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
-                                    <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Votre nom" />
+                    {/* Right: Form */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-slate-50 p-8 md:p-12 rounded-[3.5rem] border border-slate-100 shadow-xl shadow-slate-200/40"
+                    >
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Nom Complet</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        placeholder="Ex: Stéphane Agbré"
+                                        className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold placeholder:text-slate-300"
+                                    />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                    <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="votre@email.com" />
+                                <div className="space-y-2">
+                                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Email</label>
+                                    <input
+                                        required
+                                        type="email"
+                                        placeholder="votre@email.com"
+                                        className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold placeholder:text-slate-300"
+                                    />
                                 </div>
                             </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Objet</label>
-                                <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-white">
-                                    <option>Je souhaite faire un don financier</option>
-                                    <option>Je souhaite faire un don matériel</option>
-                                    <option>Je veux devenir bénévole</option>
-                                    <option>Demande de partenariat</option>
-                                    <option>Autre</option>
+                            <div className="space-y-2">
+                                <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Sujet</label>
+                                <select className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-slate-700">
+                                    <option>Faire un don</option>
+                                    <option>Devenir missionnaire</option>
+                                    <option>Partenariat</option>
+                                    <option>Autre question</option>
                                 </select>
                             </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                                <textarea rows="4" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Votre message..."></textarea>
+                            <div className="space-y-2">
+                                <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Votre Message</label>
+                                <textarea
+                                    required
+                                    rows={5}
+                                    placeholder="Comment pouvons-nous vous aider ?"
+                                    className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold placeholder:text-slate-300 resize-none"
+                                />
                             </div>
 
-                            <button type="submit" className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                Envoyer mon soutien
+                            <button
+                                disabled={status === 'sending' || status === 'success'}
+                                type="submit"
+                                className={`w-full btn-primary py-5 rounded-[2rem] flex items-center justify-center gap-3 ${status === 'success' ? 'bg-accent border-accent !shadow-accent/20' : ''
+                                    }`}
+                            >
+                                {status === 'sending' ? (
+                                    'Envoi en cours...'
+                                ) : status === 'success' ? (
+                                    <>Message envoyé !</>
+                                ) : (
+                                    <>
+                                        Envoyer le message
+                                        <Send size={20} />
+                                    </>
+                                )}
                             </button>
                         </form>
-
-                        <p className="text-xs text-gray-400 mt-4 text-center">
-                            Vos données sont sécurisées. En soumettant ce formulaire, vous acceptez notre politique de confidentialité.
-                        </p>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
