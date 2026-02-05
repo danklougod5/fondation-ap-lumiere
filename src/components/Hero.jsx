@@ -72,10 +72,15 @@ const Hero = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
-                            <Link to="/contact" className="btn-accent w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 text-sm md:text-base">
+                            <a
+                                href="https://moya-pay.com/p/pl_203zikdg"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-accent w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 text-sm md:text-base flex items-center justify-center gap-2"
+                            >
                                 <Heart size={18} fill="currentColor" />
                                 Faire un don
-                            </Link>
+                            </a>
                             <Link to="/actions" className="btn-outline bg-transparent border-white/20 text-white hover:bg-white/10 w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 text-sm md:text-base">
                                 Découvrir nos actions
                                 <ArrowRight size={18} />

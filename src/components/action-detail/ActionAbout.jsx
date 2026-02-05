@@ -145,13 +145,14 @@ const ActionAbout = ({ action }) => {
                             ) : (
                                 <p className="text-gray-400 italic mb-8">Les objectifs seront bientôt disponibles.</p>
                             )}
-
-                            <Link
-                                to="/contact"
+                            <a
+                                href="https://moya-pay.com/p/pl_203zikdg"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="block w-full bg-gradient-to-r from-accent to-emerald-400 hover:from-emerald-400 hover:to-accent text-white text-center font-bold py-4 rounded-2xl transition-all shadow-xl shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-1"
                             >
                                 Soutenir ce projet
-                            </Link>
+                            </a>
                         </motion.div>
 
                         {/* Quick Info Card */}

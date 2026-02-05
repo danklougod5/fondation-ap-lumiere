@@ -91,14 +91,16 @@ const ActionHero = ({ action }) => {
                     </motion.p>
 
                     <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
-                        <Link
-                            to="/contact"
+                        <a
+                            href="https://moya-pay.com/p/pl_203zikdg"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="group bg-gradient-to-r from-accent to-emerald-400 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all hover:shadow-2xl hover:shadow-accent/30 hover:-translate-y-1 flex items-center justify-center gap-3"
                         >
                             <Heart size={18} />
                             Soutenir ce projet
                             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                        </a>
                         <button
                             onClick={() => document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' })}
                             className="bg-white/10 backdrop-blur-md text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg border border-white/20 hover:bg-white/20 transition-all flex items-center justify-center gap-3"

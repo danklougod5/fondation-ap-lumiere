@@ -420,9 +420,14 @@ const NewsDetailPage = () => {
                                     </div>
                                     <h3 className="text-2xl md:text-3xl font-black mb-6 leading-tight uppercase tracking-tighter break-words text-white">Devenez acteur du changement</h3>
                                     <p className="text-white/60 mb-10 font-medium text-base md:text-lg leading-relaxed">Chaque don, petit ou grand, nous rapproche d'un avenir meilleur pour tous.</p>
-                                    <Link to="/contact" className="block w-full bg-gradient-to-r from-accent to-emerald-400 text-white text-center font-black py-4 md:py-5 rounded-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all uppercase text-[10px] md:text-xs tracking-widest">
+                                    <a
+                                        href="https://moya-pay.com/p/pl_203zikdg"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block w-full bg-gradient-to-r from-accent to-emerald-400 text-white text-center font-black py-4 md:py-5 rounded-2xl hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all uppercase text-[10px] md:text-xs tracking-widest"
+                                    >
                                         Soutenir nos actions
-                                    </Link>
+                                    </a>
                                 </div>
                                 {/* Decorative elements */}
                                 <div className="absolute top-[-20%] right-[-20%] w-64 h-64 bg-accent/10 rounded-full blur-[80px]" />

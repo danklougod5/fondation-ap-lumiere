@@ -255,12 +255,14 @@ const ProjectDetailPage = () => {
                                 <p className="text-slate-400 font-medium mb-8 leading-relaxed">
                                     Votre contribution directe est le moteur de cette initiative. Chaque don accélère la progression.
                                 </p>
-                                <Link
-                                    to="/contact"
+                                <a
+                                    href="https://moya-pay.com/p/pl_203zikdg"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="block w-full bg-emerald-500 hover:bg-emerald-600 text-white text-center font-black py-5 rounded-2xl transition-all shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-1 uppercase tracking-widest text-sm"
                                 >
                                     Faire un Don
-                                </Link>
+                                </a>
                                 <button className="w-full mt-4 flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors py-3 font-bold text-sm">
                                     <Share2 size={16} /> Partager l'initiative
                                 </button>

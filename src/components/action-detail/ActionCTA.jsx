@@ -31,13 +31,15 @@ const ActionCTA = () => {
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-4">
-                        <Link
-                            to="/contact"
+                        <a
+                            href="https://moya-pay.com/p/pl_203zikdg"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-gradient-to-r from-accent to-emerald-400 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-accent/30 transition-all hover:-translate-y-1 flex items-center gap-3"
                         >
                             <Heart size={20} />
                             Faire un don
-                        </Link>
+                        </a>
                         <Link
                             to="/contact"
                             className="bg-white/10 backdrop-blur-md text-white px-10 py-4 rounded-2xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all flex items-center gap-3"

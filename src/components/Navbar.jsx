@@ -94,8 +94,10 @@ const Navbar = () => {
 
                     <div className="w-px h-6 bg-slate-200 mx-4 hidden lg:block" />
 
-                    <Link
-                        to="/contact"
+                    <a
+                        href="https://moya-pay.com/p/pl_203zikdg"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={`hidden lg:flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-500 group ${isWhiteTextPage
                             ? 'bg-white text-primary hover:bg-accent hover:text-white'
                             : 'bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/20'
@@ -103,7 +105,7 @@ const Navbar = () => {
                     >
                         <Heart size={16} className="group-hover:scale-110 transition-transform" fill="currentColor" />
                         Faire un don
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Mobile Menu Toggle */}
@@ -138,13 +140,15 @@ const Navbar = () => {
                                 </Link>
                             ))}
                             <div className="pt-8 space-y-4">
-                                <Link
-                                    to="/contact"
+                                <a
+                                    href="https://moya-pay.com/p/pl_203zikdg"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="flex items-center justify-center gap-3 w-full bg-primary text-white font-black py-5 rounded-[2rem] text-lg shadow-2xl shadow-primary/30"
                                 >
                                     <Heart size={24} fill="currentColor" />
                                     Faire un don
-                                </Link>
+                                </a>
                             </div>
                         </div>
 

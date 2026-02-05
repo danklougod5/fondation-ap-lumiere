@@ -70,13 +70,25 @@ const Footer = () => {
                                     { name: 'À Propos', path: '/apropos' },
                                     { name: 'Nos Actions', path: '/actions' },
                                     { name: 'Actualités', path: '/actualites' },
-                                    { name: 'Faire un don', path: '/contact' }
+                                    { name: 'Faire un don', path: 'https://moya-pay.com/p/pl_203zikdg', isExternal: true }
                                 ].map((link) => (
                                     <li key={link.name}>
-                                        <Link to={link.path} className="text-white/50 hover:text-accent font-bold transition-colors flex items-center gap-2 group">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-accent scale-0 group-hover:scale-100 transition-transform" />
-                                            {link.name}
-                                        </Link>
+                                        {link.isExternal ? (
+                                            <a
+                                                href={link.path}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-white/50 hover:text-accent font-bold transition-colors flex items-center gap-2 group"
+                                            >
+                                                <div className="w-1.5 h-1.5 rounded-full bg-accent scale-0 group-hover:scale-100 transition-transform" />
+                                                {link.name}
+                                            </a>
+                                        ) : (
+                                            <Link to={link.path} className="text-white/50 hover:text-accent font-bold transition-colors flex items-center gap-2 group">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-accent scale-0 group-hover:scale-100 transition-transform" />
+                                                {link.name}
+                                            </Link>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
