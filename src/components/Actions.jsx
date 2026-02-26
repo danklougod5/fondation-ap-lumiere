@@ -6,7 +6,9 @@ import {
     Sparkles, Zap
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { cachedFetch } from '../lib/cache';
 import { motion } from 'framer-motion';
+import SeamlessImage from './SeamlessImage';
 
 // Swiper imports
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -35,13 +37,16 @@ const Actions = () => {
 
     const fetchActions = async () => {
         try {
-            const { data, error } = await supabase
-                .from('actions')
-                .select('*')
-                .order('created_at', { ascending: true });
+            const data = await cachedFetch('actions_all', async () => {
+                const { data, error } = await supabase
+                    .from('actions')
+                    .select('*')
+                    .order('created_at', { ascending: true });
+                if (error) throw error;
+                return data || [];
+            });
 
-            if (error) throw error;
-            setActions(data || []);
+            setActions(data);
         } catch (error) {
             console.error('Error fetching actions:', error.message);
         } finally {
@@ -60,7 +65,7 @@ const Actions = () => {
     if (actions.length === 0) return null;
 
     return (
-        <section id="actions" className="section-padding bg-white relative overflow-hidden">
+        <section id="actions" className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-6 md:pb-10 bg-white relative overflow-hidden">
             {/* Enhanced Background Decorations */}
             <div className="absolute top-0 right-0 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] bg-gradient-to-bl from-primary/5 via-accent/3 to-transparent rounded-full blur-[100px] md:blur-[120px] -mr-48 md:-mr-80 -mt-48 md:-mt-80 opacity-50 z-0"></div>
 
@@ -139,26 +144,14 @@ const Actions = () => {
                                             to={`/actions/${action.slug}`}
                                             className="relative block h-[480px] sm:h-[500px] md:h-[520px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-slate-900 shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 active:scale-[0.98]"
                                         >
-                                            {/* Background Image */}
+                                            {/* Background Image - Now Seamless */}
                                             <div className="absolute inset-0">
-                                                {action.image_url ? (
-                                                    <img
-                                                        src={action.image_url}
-                                                        alt={action.title}
-                                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-active:scale-105"
-                                                    />
-                                                ) : action.video_url ? (
-                                                    <video
-                                                        autoPlay
-                                                        muted
-                                                        loop
-                                                        playsInline
-                                                        className="w-full h-full object-cover transform scale-105"
-                                                    >
-                                                        <source src={action.video_url} type="video/mp4" />
-                                                        <source src={action.video_url} type="video/webm" />
-                                                    </video>
-                                                ) : null}
+                                                <SeamlessImage
+                                                    src={action.image_url}
+                                                    fallback="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+                                                    alt={action.title}
+                                                    className="transition-transform duration-1000 group-hover:scale-110 group-active:scale-105"
+                                                />
                                                 {/* Multi-layer Gradient */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/70 to-slate-900/30 group-hover:from-slate-900/98 transition-all duration-500"></div>
                                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { cachedFetch } from '../lib/cache';
 import { Target, ArrowRight, Loader2, Sparkles, Sprout, Hammer } from 'lucide-react';
+import { OptimizedImage, OptimizedVideo } from './OptimizedMedia';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -14,13 +16,16 @@ const Projects = () => {
 
     const fetchProjects = async () => {
         try {
-            const { data, error } = await supabase
-                .from('projects')
-                .select('*')
-                .order('created_at', { ascending: false });
+            const data = await cachedFetch('projects_homepage', async () => {
+                const { data, error } = await supabase
+                    .from('projects')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                if (error) throw error;
+                return data || [];
+            });
 
-            if (error) throw error;
-            setProjects(data || []);
+            setProjects(data);
         } catch (error) {
             console.error('Error fetching projects:', error.message);
         } finally {
@@ -40,22 +45,16 @@ const Projects = () => {
         >
             <div className="lg:w-1/2 relative overflow-hidden h-64 lg:h-auto bg-slate-800">
                 {project.image_url ? (
-                    <img
+                    <OptimizedImage
                         src={project.image_url}
                         alt={project.title}
                         className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-1000"
                     />
                 ) : project.video_url ? (
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
+                    <OptimizedVideo
+                        src={project.video_url}
                         className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-1000"
-                    >
-                        <source src={project.video_url} type="video/mp4" />
-                        <source src={project.video_url} type="video/webm" />
-                    </video>
+                    />
                 ) : null}
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-transparent hidden lg:block" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent lg:hidden" />
@@ -125,22 +124,16 @@ const Projects = () => {
             >
                 <div className="relative h-64 overflow-hidden shrink-0 bg-slate-800">
                     {project.image_url ? (
-                        <img
+                        <OptimizedImage
                             src={project.image_url}
                             alt={project.title}
                             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000"
                         />
                     ) : project.video_url ? (
-                        <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
+                        <OptimizedVideo
+                            src={project.video_url}
                             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000"
-                        >
-                            <source src={project.video_url} type="video/mp4" />
-                            <source src={project.video_url} type="video/webm" />
-                        </video>
+                        />
                     ) : null}
                     <div className="absolute top-6 left-6 px-4 py-2 bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-emerald-50">
                         <div className="flex items-center gap-2">
@@ -186,9 +179,9 @@ const Projects = () => {
     );
 
     return (
-        <section id="projects" className="section-padding bg-white relative overflow-hidden">
+        <section id="projects" className="pt-6 md:pt-10 pb-12 sm:pb-16 md:pb-20 lg:pb-24 bg-white relative overflow-hidden">
             <div className="container-custom">
-                <div className="text-center max-w-3xl mx-auto mb-20">
+                <div className="text-center max-w-3xl mx-auto mb-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}

@@ -158,35 +158,34 @@ const ActionGallery = ({ galleryImages, selectedImage, setSelectedImage }) => {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="relative w-full h-[90vh] flex flex-col items-center justify-center pointer-events-none z-[110]"
+                            className="relative w-[92vw] h-[85vh] md:w-[85vw] md:h-[85vh] pointer-events-none z-[110]"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="relative group w-full h-full flex items-center justify-center pointer-events-auto">
-                                <motion.img
-                                    key={selectedImage.id}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    src={selectedImage.image_url}
-                                    alt={selectedImage.title}
-                                    className="max-w-[95%] max-h-[90%] md:max-w-[90%] md:max-h-[85%] object-contain rounded-2xl md:rounded-3xl shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/10"
-                                />
+                            {/* Image — no container, no border, just the image */}
+                            <motion.img
+                                key={selectedImage.id}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.3 }}
+                                src={selectedImage.image_url}
+                                alt={selectedImage.title}
+                                className="w-full h-full object-contain pointer-events-auto drop-shadow-2xl"
+                            />
 
-                                {selectedImage.title && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="absolute bottom-4 left-4 right-4 md:bottom-10 md:left-10 md:right-10 flex justify-center"
-                                    >
-                                        <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] inline-block max-w-2xl shadow-2xl">
-                                            <h3 className="text-white font-black text-lg md:text-2xl uppercase tracking-tight text-center">
-                                                {selectedImage.title}
-                                            </h3>
-                                            <div className="h-1 w-8 md:w-12 bg-accent mt-3 mx-auto rounded-full"></div>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </div>
+                            {selectedImage.title && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="absolute bottom-4 left-0 right-0 flex justify-center z-20 pointer-events-none"
+                                >
+                                    <div className="bg-slate-900/70 backdrop-blur-xl px-6 py-4 md:px-10 md:py-6 rounded-2xl inline-block max-w-2xl text-center">
+                                        <h3 className="text-white font-black text-base md:text-2xl uppercase tracking-tight">
+                                            {selectedImage.title}
+                                        </h3>
+                                        <div className="h-1 w-8 md:w-12 bg-accent mt-3 mx-auto rounded-full"></div>
+                                    </div>
+                                </motion.div>
+                            )}
                         </motion.div>
                     </motion.div>
                 )}

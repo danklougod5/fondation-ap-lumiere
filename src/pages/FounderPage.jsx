@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Quote, Music, User, Globe, Heart, Award, Facebook, Instagram } from 'lucide-react';
 import Apoutchou from '../assets/Apoutchou.jpg';
+import SEO from '../components/SEO';
 
 import { supabase } from '../lib/supabase';
+import SeamlessImage from '../components/SeamlessImage';
 
 const FounderPage = () => {
-    const [profileImage, setProfileImage] = React.useState(Apoutchou);
+    const [dynamicProfile, setDynamicProfile] = React.useState(null);
 
     React.useEffect(() => {
         const fetchProfile = async () => {
@@ -15,7 +17,9 @@ const FounderPage = () => {
                 .select('value')
                 .eq('key', 'founder_profile_image')
                 .single();
-            if (data?.value) setProfileImage(data.value);
+            if (data?.value) {
+                setDynamicProfile(data.value);
+            }
         };
         fetchProfile();
     }, []);
@@ -26,13 +30,21 @@ const FounderPage = () => {
 
     return (
         <div className="pt-24 bg-white">
+            <SEO
+                title="Le Fondateur"
+                description="Découvrez le parcours de Stéphane Agbré (Apoutchou National), fondateur de la Fondation AP Lumière d'Afrique."
+                url="/fondateur"
+            />
             {/* Hero Section */}
             <section className="relative h-[60vh] overflow-hidden bg-slate-900">
-                <img
-                    src={profileImage}
-                    alt="Apoutchou National"
-                    className="w-full h-full object-cover opacity-50 scale-110 blur-sm absolute inset-0"
-                />
+                <div className="absolute inset-0 scale-110 blur-sm">
+                    <SeamlessImage
+                        src={dynamicProfile}
+                        fallback={Apoutchou}
+                        alt="Apoutchou National"
+                        className="opacity-50"
+                    />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
 
                 <div className="container-custom relative h-full flex flex-col justify-end pb-12">
@@ -68,11 +80,13 @@ const FounderPage = () => {
                                 className="sticky top-32"
                             >
                                 <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
-                                    <img
-                                        src={profileImage}
-                                        alt="Stéphane Agbré"
-                                        className="w-full aspect-[3/4] object-cover"
-                                    />
+                                    <div className="aspect-[3/4]">
+                                        <SeamlessImage
+                                            src={dynamicProfile}
+                                            fallback={Apoutchou}
+                                            alt="Stéphane Agbré"
+                                        />
+                                    </div>
                                     <div className="absolute top-4 right-4 bg-primary text-white p-3 rounded-2xl shadow-lg">
                                         <Sparkles size={24} />
                                     </div>

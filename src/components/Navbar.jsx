@@ -34,7 +34,12 @@ const Navbar = () => {
     };
 
     const isHomePage = location.pathname === '/';
-    const isWhiteTextPage = isHomePage && !scrolled && !isOpen;
+    const isDetailPage = location.pathname.startsWith('/actions/') ||
+        location.pathname.startsWith('/actualites/') ||
+        location.pathname.startsWith('/projets/');
+    const isFounderPage = location.pathname === '/fondateur';
+
+    const isWhiteTextPage = (isHomePage || isDetailPage || isFounderPage) && !scrolled && !isOpen;
 
     return (
         <nav

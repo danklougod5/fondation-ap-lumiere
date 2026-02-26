@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '../lib/supabase';
+import { cachedFetch } from '../lib/cache';
 import { Link } from 'react-router-dom';
-import { Calendar, ArrowRight, Sparkles, User, ArrowUpRight, Play } from 'lucide-react';
+import { Calendar, ArrowRight, Sparkles, User, ArrowUpRight, Play, Newspaper } from 'lucide-react';
+import { OptimizedImage, OptimizedVideo } from './OptimizedMedia';
 
 const News = () => {
     const [newsItems, setNewsItems] = useState([]);
@@ -14,14 +16,17 @@ const News = () => {
 
     const fetchNews = async () => {
         try {
-            const { data, error } = await supabase
-                .from('news')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(3);
+            const data = await cachedFetch('news_homepage', async () => {
+                const { data, error } = await supabase
+                    .from('news')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(3);
+                if (error) throw error;
+                return data || [];
+            });
 
-            if (error) throw error;
-            setNewsItems(data || []);
+            setNewsItems(data);
         } catch (error) {
             console.error('Error fetching news:', error.message);
         } finally {
@@ -80,22 +85,16 @@ const News = () => {
                                 {/* Image Container */}
                                 <div className="relative h-56 sm:h-64 md:h-72 overflow-hidden bg-slate-100">
                                     {item.image_url ? (
-                                        <img
+                                        <OptimizedImage
                                             src={item.image_url}
                                             alt={item.title}
                                             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000"
                                         />
                                     ) : item.video_url ? (
-                                        <video
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
+                                        <OptimizedVideo
+                                            src={item.video_url}
                                             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000"
-                                        >
-                                            <source src={item.video_url} type="video/mp4" />
-                                            <source src={item.video_url} type="video/webm" />
-                                        </video>
+                                        />
                                     ) : (
                                         <div className="w-full h-full bg-slate-100 flex items-center justify-center">
                                             <Newspaper className="text-slate-200" size={48} />

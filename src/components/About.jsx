@@ -6,11 +6,12 @@ import { motion } from 'framer-motion';
 import { Sparkles, Quote, History, MapPin } from 'lucide-react';
 
 import { supabase } from '../lib/supabase';
+import SeamlessImage from './SeamlessImage';
 
 const About = () => {
-    const [images, setImages] = React.useState({
-        main: FondationAp,
-        founder: Apoutchou
+    const [dynamicImages, setDynamicImages] = React.useState({
+        main: null,
+        founder: null
     });
 
     React.useEffect(() => {
@@ -21,12 +22,12 @@ const About = () => {
                 .in('key', ['about_main_image', 'about_founder_image']);
 
             if (data) {
-                const newImages = { ...images };
+                const updates = {};
                 data.forEach(item => {
-                    if (item.key === 'about_main_image' && item.value) newImages.main = item.value;
-                    if (item.key === 'about_founder_image' && item.value) newImages.founder = item.value;
+                    if (item.key === 'about_main_image') updates.main = item.value;
+                    if (item.key === 'about_founder_image') updates.founder = item.value;
                 });
-                setImages(newImages);
+                setDynamicImages(updates);
             }
         };
         fetchImages();
@@ -48,27 +49,28 @@ const About = () => {
                             transition={{ duration: 0.8 }}
                             className="relative"
                         >
-                            {/* Main Image Frame */}
-                            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200">
-                                <img
-                                    src={images.main}
+                            {/* Main Image Frame - Now Seamless */}
+                            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 h-[500px] lg:h-[600px]">
+                                <SeamlessImage
+                                    src={dynamicImages.main}
+                                    fallback={FondationAp}
                                     alt="Fondation AP Lumière d'Afrique Action"
-                                    className="w-full h-[500px] lg:h-[600px] object-cover transform hover:scale-105 transition-transform duration-700"
+                                    className="transform hover:scale-105 transition-transform duration-700"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent pointer-events-none"></div>
                             </div>
 
-                            {/* Floating Stats */}
+                            {/* Floating Stats - Now Seamless */}
                             <motion.div
                                 animate={{ y: [0, -10, 0] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                 className="absolute -bottom-10 -right-10 w-48 h-48 bg-white p-3 rounded-[2rem] shadow-2xl z-20 hidden md:block border border-slate-100"
                             >
                                 <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-50">
-                                    <img
-                                        src={images.founder}
+                                    <SeamlessImage
+                                        src={dynamicImages.founder}
+                                        fallback={Apoutchou}
                                         alt="Fondateur Apoutchou"
-                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                                 <div className="absolute -top-4 -right-4 w-12 h-12 bg-accent rounded-2xl flex items-center justify-center text-white shadow-lg shadow-accent/20">

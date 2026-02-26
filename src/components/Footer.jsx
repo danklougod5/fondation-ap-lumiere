@@ -60,7 +60,7 @@ const Footer = () => {
                     <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-12">
                         {/* Navigation */}
                         <div>
-                            <h4 className="text-lg font-black font-heading mb-8 flex items-center gap-2">
+                            <h4 className="text-lg font-black font-heading mb-8 flex items-center gap-2 text-white">
                                 <Sparkles size={18} className="text-accent" />
                                 Navigation
                             </h4>
@@ -96,7 +96,7 @@ const Footer = () => {
 
                         {/* Contact */}
                         <div className="sm:col-span-2">
-                            <h4 className="text-lg font-black font-heading mb-8 flex items-center gap-2">
+                            <h4 className="text-lg font-black font-heading mb-8 flex items-center gap-2 text-white">
                                 <Globe size={18} className="text-accent" />
                                 Nous Trouver
                             </h4>
@@ -125,12 +125,12 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.3em] order-2 md:order-1">
+                <div className="pt-12 border-t border-white/5 flex flex-col lg:flex-row items-center justify-between gap-y-8 gap-x-12">
+                    <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.3em] order-2 lg:order-1 text-center lg:text-left leading-relaxed">
                         &copy; 2026 Fondation AP Lumière d'Afrique — Tous droits réservés
                     </p>
 
-                    <div className="flex items-center gap-8 order-1 md:order-2">
+                    <div className="flex items-center gap-8 order-1 lg:order-2">
                         <Link to="/privacy" className="text-white/40 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
                             Confidentialité
                         </Link>
@@ -139,8 +139,8 @@ const Footer = () => {
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-[0.2em] order-3">
-                        Crafted with <Heart size={12} className="text-accent fill-accent" /> for impact
+                    <div className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] order-3 text-center lg:text-right leading-relaxed max-w-[300px] lg:max-w-none">
+                        Créé par <span className="text-white">SDSN</span> (Société de Développement de Solutions Numériques) et <span className="text-white">Moya-Pay</span>
                     </div>
                 </div>
             </div>

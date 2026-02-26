@@ -1,18 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Heart, Crown, Building2, Users } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Partners = () => {
     // Using typographic logos since we don't have official SVGs, 
     // creating a consistent and premium look.
     const partners = [
-        { name: "Ministère de la Solidarité", icon: Building2 },
-        { name: "Fondation Magic System", icon: Sparkles },
-        { name: "Roi 12-12", icon: Crown },
-        { name: "Mairie de Cocody", icon: Building2 },
-        { name: "UNESCO Afrique", icon: Users },
-        { name: "Union Européenne", icon: Sparkles },
+        { name: "Ministère de la Solidarité" },
+        { name: "Fondation Magic System" },
+        { name: "Roi 12-12" },
+        { name: "Mairie de Cocody" },
     ];
 
     // Double the list for seamless infinite scroll
@@ -51,11 +49,7 @@ const Partners = () => {
                     }}
                 >
                     {marqueeList.map((partner, index) => (
-                        <div key={index} className="flex items-center gap-4 group cursor-default">
-                            {/* Icon Placeholder */}
-                            <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 group-hover:text-accent group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300">
-                                <partner.icon size={20} />
-                            </div>
+                        <div key={index} className="flex items-center group cursor-default">
                             {/* Text Logo */}
                             <span className="text-2xl md:text-3xl font-black text-white/30 whitespace-nowrap group-hover:text-white transition-colors duration-300 font-heading tracking-tight">
                                 {partner.name}
@@ -81,7 +75,7 @@ const Partners = () => {
                         <span className="text-slate-200 font-medium">
                             Rejoignez la communauté des <span className="text-white font-black text-lg">"Missionnaires"</span> d'Apoutchou National
                         </span>
-                        <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-slate-900 group-hover:scale-110 transition-transform">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center text-slate-900 group-hover:scale-110 transition-transform">
                             <Heart size={16} fill="currentColor" />
                         </div>
                     </Link>
