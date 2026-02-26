@@ -109,8 +109,8 @@ const ActionAbout = ({ action }) => {
                             className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm"
                         >
                             <h3 className="text-xl font-heading font-black mb-6 flex items-center gap-3 text-slate-900">
-                                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
-                                    <Target size={18} />
+                                <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-500">
+                                    <CheckCircle2 size={18} />
                                 </div>
                                 Objectifs
                             </h3>
@@ -118,8 +118,8 @@ const ActionAbout = ({ action }) => {
                             <ul className="space-y-4">
                                 {(action.objectives || []).map((objective, index) => (
                                     <li key={index} className="flex gap-3 items-start">
-                                        <div className="mt-1.5 w-4 h-4 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                                        <div className="mt-1 w-5 h-5 flex items-center justify-center shrink-0 text-emerald-500">
+                                            <CheckCircle2 size={16} strokeWidth={3} />
                                         </div>
                                         <span className="text-slate-600 font-medium leading-relaxed text-sm">{objective}</span>
                                     </li>
