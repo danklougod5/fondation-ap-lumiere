@@ -147,10 +147,12 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="flex items-center gap-4">
                             <div className="flex flex-col">
-                                <span className="text-xs font-black uppercase text-slate-400 mb-1">Minutes</span>
+                                <label htmlFor="video-minutes" className="text-xs font-black uppercase text-slate-400 mb-1">Minutes</label>
                                 <input
+                                    id="video-minutes"
                                     type="number"
                                     min="0"
+                                    aria-label="Minutes de la capture d'écran"
                                     value={Math.floor(screenshotTime / 60)}
                                     onChange={(e) => {
                                         const val = parseInt(e.target.value) || 0;
@@ -164,11 +166,13 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
                             </div>
                             <span className="text-2xl font-black text-slate-300 mt-5">:</span>
                             <div className="flex flex-col">
-                                <span className="text-xs font-black uppercase text-slate-400 mb-1">Secondes</span>
+                                <label htmlFor="video-seconds" className="text-xs font-black uppercase text-slate-400 mb-1">Secondes</label>
                                 <input
+                                    id="video-seconds"
                                     type="number"
                                     min="0"
                                     max="59"
+                                    aria-label="Secondes de la capture d'écran"
                                     value={screenshotTime % 60}
                                     onChange={(e) => {
                                         const val = parseInt(e.target.value) || 0;
@@ -253,7 +257,7 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
                     ${error ? 'border-red-300 bg-red-50' : ''}
                 `}
             >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} aria-label={label || "Télécharger une vidéo"} />
                 {uploading ? (
                     <div className="flex flex-col items-center gap-3">
                         <Loader2 className="animate-spin text-primary" size={24} />

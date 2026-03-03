@@ -39,12 +39,14 @@ const SeamlessImage = ({
     return (
         <div className={`relative overflow-hidden ${wrapperClassName}`} style={{ width: '100%', height: '100%' }}>
             {/* 1. The Fallback Image (Always Present or Fading Out) */}
-            <img
-                src={fallback}
-                alt={alt}
-                className={`${className} absolute inset-0 w-full h-full transition-opacity duration-1000 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
-                style={{ objectFit }}
-            />
+            {fallback && (
+                <img
+                    src={fallback}
+                    alt={alt}
+                    className={`${className} absolute inset-0 w-full h-full transition-opacity duration-1000 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+                    style={{ objectFit }}
+                />
+            )}
 
             {/* 2. The Dynamic Image (Fading In Over the Fallback) */}
             {isLoaded && currentSrc && (

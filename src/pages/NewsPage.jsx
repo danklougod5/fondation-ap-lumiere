@@ -145,6 +145,7 @@ const NewsPage = () => {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="w-full bg-white pl-20 pr-8 py-5 md:py-6 rounded-[2.5rem] border-0 outline-none ring-1 ring-slate-100/50 shadow-xl shadow-slate-200/40 focus:ring-4 focus:ring-primary/10 text-lg md:text-xl transition-all relative z-10 font-medium placeholder:text-slate-400"
+                                aria-label="Rechercher des articles"
                             />
                         </motion.div>
                     </div>

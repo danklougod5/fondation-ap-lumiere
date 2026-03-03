@@ -165,7 +165,7 @@ export const actionsData = [
         title: "Infrastructures",
         subtitle: "Améliorer les Conditions de Vie",
         icon: "Hammer",
-        image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop",
+        image: null,
         shortDesc: "Construction de forages et rénovation d'habitats pour améliorer les conditions de vie fondamentales.",
         fullDescription: `
             L'accès à l'eau potable et à un logement décent sont des droits fondamentaux. La Fondation AP Lumière d'Afrique s'engage dans des projets d'infrastructures qui transforment durablement les conditions de vie des populations les plus vulnérables.
@@ -209,7 +209,7 @@ export const actionsData = [
             "Programme de rénovation d'habitats pour 50 familles"
         ],
         callToAction: "Participez à la construction d'un avenir meilleur pour les enfants d'Afrique.",
-        gallery: ["https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop"]
+        gallery: []
     }
 ];
 

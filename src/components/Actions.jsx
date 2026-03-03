@@ -148,7 +148,7 @@ const Actions = () => {
                                             <div className="absolute inset-0">
                                                 <SeamlessImage
                                                     src={action.image_url}
-                                                    fallback="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+                                                    fallback={null}
                                                     alt={action.title}
                                                     className="transition-transform duration-1000 group-hover:scale-110 group-active:scale-105"
                                                 />

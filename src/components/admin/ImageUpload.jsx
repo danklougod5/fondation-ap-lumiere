@@ -86,7 +86,7 @@ const ImageUpload = ({ label, onUpload, currentImage, multiple = false, classNam
                     ${uploading ? 'pointer-events-none opacity-50' : ''}
                 `}
             >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} aria-label={label || "Télécharger une image"} />
                 {uploading ? (
                     <div className="flex flex-col items-center gap-3">
                         <Loader2 className="animate-spin text-primary" size={24} />

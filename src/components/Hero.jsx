@@ -8,7 +8,6 @@ import { cachedFetch } from '../lib/cache';
 import SeamlessImage from './SeamlessImage';
 import SEO from './SEO';
 
-const DEFAULT_BG = "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
 
 const Hero = () => {
     const [dynamicBg, setDynamicBg] = React.useState(null);
@@ -54,7 +53,7 @@ const Hero = () => {
                     >
                         <SeamlessImage
                             src={dynamicBg}
-                            fallback={DEFAULT_BG}
+                            fallback={null}
                             alt="Enfants en Afrique"
                         />
                     </motion.div>

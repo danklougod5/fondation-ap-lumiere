@@ -95,8 +95,9 @@ const Contact = () => {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Nom Complet</label>
+                                    <label htmlFor="full-name" className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Nom Complet</label>
                                     <input
+                                        id="full-name"
                                         required
                                         type="text"
                                         placeholder="Ex: Stéphane Agbré"
@@ -104,8 +105,9 @@ const Contact = () => {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Email</label>
+                                    <label htmlFor="email" className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Email</label>
                                     <input
+                                        id="email"
                                         required
                                         type="email"
                                         placeholder="votre@email.com"
@@ -114,8 +116,8 @@ const Contact = () => {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Sujet</label>
-                                <select className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-slate-700">
+                                <label htmlFor="subject" className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Sujet</label>
+                                <select id="subject" className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-slate-700">
                                     <option>Faire un don</option>
                                     <option>Devenir missionnaire</option>
                                     <option>Partenariat</option>
@@ -123,8 +125,9 @@ const Contact = () => {
                                 </select>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Votre Message</label>
+                                <label htmlFor="message" className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Votre Message</label>
                                 <textarea
+                                    id="message"
                                     required
                                     rows={5}
                                     placeholder="Comment pouvons-nous vous aider ?"

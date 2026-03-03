@@ -44,7 +44,7 @@ const Footer = () => {
                                 { icon: Instagram, href: "https://www.instagram.com/apoutchou_national_24/" },
                             ].map((social, idx) => (
                                 <a
-                                    key={idx}
+                                    key={social.href}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"

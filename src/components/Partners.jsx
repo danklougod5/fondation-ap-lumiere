@@ -49,7 +49,7 @@ const Partners = () => {
                     }}
                 >
                     {marqueeList.map((partner, index) => (
-                        <div key={index} className="flex items-center group cursor-default">
+                        <div key={`${partner.name}-${index}`} className="flex items-center group cursor-default">
                             {/* Text Logo */}
                             <span className="text-2xl md:text-3xl font-black text-white/30 whitespace-nowrap group-hover:text-white transition-colors duration-300 font-heading tracking-tight">
                                 {partner.name}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Apoutchou from '../assets/Apoutchou.jpg';
-import FondationAp from '../assets/fondationAp.jpg';
 import { motion } from 'framer-motion';
 import { Sparkles, Quote, History, MapPin } from 'lucide-react';
 
@@ -53,7 +52,6 @@ const About = () => {
                             <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 h-[500px] lg:h-[600px]">
                                 <SeamlessImage
                                     src={dynamicImages.main}
-                                    fallback={FondationAp}
                                     alt="Fondation AP Lumière d'Afrique Action"
                                     className="transform hover:scale-105 transition-transform duration-700"
                                 />
@@ -72,9 +70,6 @@ const About = () => {
                                         fallback={Apoutchou}
                                         alt="Fondateur Apoutchou"
                                     />
-                                </div>
-                                <div className="absolute -top-4 -right-4 w-12 h-12 bg-accent rounded-2xl flex items-center justify-center text-white shadow-lg shadow-accent/20">
-                                    <Sparkles size={24} />
                                 </div>
                             </motion.div>
 

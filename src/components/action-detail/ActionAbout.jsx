@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Rocket, MapPin, Target, CheckCircle2, Calendar, ArrowRight, Activity } from 'lucide-react';
+import { Users, Rocket, MapPin, Target, CheckCircle2, Calendar, ArrowRight, Activity, Quote } from 'lucide-react';
 import { staggerContainer, scaleIn } from './animations';
 
 const ActionAbout = ({ action }) => {
     return (
         <section id="about-section" className="py-16 md:py-24 bg-white overflow-hidden">
-            <div className="container-custom">
+            <div className="container mx-auto px-4">
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
 
                     {/* Main Content Area */}
@@ -19,26 +19,33 @@ const ActionAbout = ({ action }) => {
                             viewport={{ once: true }}
                             className="relative"
                         >
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent font-bold text-xs uppercase tracking-widest mb-6">
-                                <Activity size={14} />
-                                Notre Impact
-                            </div>
 
-                            <h2 className="text-3xl md:text-5xl font-heading font-black text-slate-900 mb-8 leading-[1.1]">
-                                À propos de <span className="gradient-text">{action.title}</span>
+
+                            <h2 className="font-heading font-black text-slate-900 mb-10 leading-[1.1]">
+                                <span className="block text-xs md:text-sm uppercase tracking-[0.4em] text-slate-400 mb-4 font-bold">À propos de l'action</span>
+                                <span className="text-3xl md:text-5xl lg:text-6xl gradient-text leading-tight block">
+                                    {action.title}
+                                </span>
                             </h2>
 
-                            <div className="prose-xl prose-slate max-w-none mb-12">
-                                {action.description ? (
-                                    <div
-                                        className="text-slate-600 leading-relaxed rich-content"
-                                        dangerouslySetInnerHTML={{ __html: action.description }}
-                                    />
-                                ) : (
-                                    <p className="text-slate-400 italic">
-                                        Aucune description détaillée n'est encore disponible.
-                                    </p>
-                                )}
+                            <div className="h-px w-20 bg-primary/20 mb-12" />
+
+                            <div className="relative">
+                                {/* Decorative quote mark for a more editorial feel */}
+                                <Quote className="absolute -top-10 -left-10 text-slate-50 w-24 h-24 -z-10 opacity-60" />
+
+                                <div className="prose-xl md:prose-2xl prose-slate max-w-none mb-12">
+                                    {action.description ? (
+                                        <div
+                                            className="text-slate-600 leading-[1.8] font-medium rich-content"
+                                            dangerouslySetInnerHTML={{ __html: action.description }}
+                                        />
+                                    ) : (
+                                        <p className="text-slate-400 italic">
+                                            Aucune description détaillée n'est encore disponible.
+                                        </p>
+                                    )}
+                                </div>
                             </div>
 
                             {/* Integrated Stats Bar */}
@@ -47,8 +54,8 @@ const ActionAbout = ({ action }) => {
                                     { number: action.impact_vies || "20+", label: "Vies impactées", icon: Users, color: "text-accent" },
                                     { number: action.impact_projets || "Divers", label: "Projets réalisés", icon: Rocket, color: "text-primary" },
                                     { number: action.impact_regions || "Locale", label: "Zone couverte", icon: MapPin, color: "text-purple-500" }
-                                ].map((stat, index) => (
-                                    <div key={index} className="flex items-start gap-4 group">
+                                ].map((stat) => (
+                                    <div key={stat.label} className="flex items-start gap-4 group">
                                         <div className={`p-3 rounded-2xl bg-slate-50 ${stat.color} group-hover:scale-110 transition-transform`}>
                                             <stat.icon size={24} />
                                         </div>
@@ -77,9 +84,9 @@ const ActionAbout = ({ action }) => {
                                 </div>
 
                                 <div className="grid sm:grid-cols-2 gap-4">
-                                    {action.upcoming_projects.map((project, index) => (
+                                    {action.upcoming_projects.map((project) => (
                                         <div
-                                            key={index}
+                                            key={project}
                                             className="group relative p-6 bg-slate-50 rounded-3xl border border-transparent hover:border-accent/20 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300"
                                         >
                                             <div className="flex items-center justify-between gap-4">
@@ -116,8 +123,8 @@ const ActionAbout = ({ action }) => {
                             </h3>
 
                             <ul className="space-y-4">
-                                {(action.objectives || []).map((objective, index) => (
-                                    <li key={index} className="flex gap-3 items-start">
+                                {(action.objectives || []).map((objective) => (
+                                    <li key={objective} className="flex gap-3 items-start">
                                         <div className="mt-1 w-5 h-5 flex items-center justify-center shrink-0 text-emerald-500">
                                             <CheckCircle2 size={16} strokeWidth={3} />
                                         </div>

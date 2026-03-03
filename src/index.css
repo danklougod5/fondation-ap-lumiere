@@ -215,7 +215,7 @@
 }
 
 .rich-content p {
-    @apply mb-6 leading-relaxed text-slate-600;
+    @apply mb-8 leading-[1.8] text-slate-600 font-medium;
 }
 
 .rich-content ul {

@@ -133,8 +133,9 @@ const AdminProjectEditor = () => {
                 <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700 ml-1">Titre du projet</label>
+                            <label htmlFor="project-title" className="text-sm font-bold text-gray-700 ml-1">Titre du projet</label>
                             <input
+                                id="project-title"
                                 type="text"
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -145,8 +146,9 @@ const AdminProjectEditor = () => {
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700 ml-1">Slug (URL)</label>
+                            <label htmlFor="project-slug" className="text-sm font-bold text-gray-700 ml-1">Slug (URL)</label>
                             <input
+                                id="project-slug"
                                 type="text"
                                 value={formData.slug}
                                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
@@ -159,9 +161,10 @@ const AdminProjectEditor = () => {
 
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700 ml-1">Progression (%)</label>
+                            <label htmlFor="project-progress" className="text-sm font-bold text-gray-700 ml-1">Progression (%)</label>
                             <div className="flex items-center gap-4">
                                 <input
+                                    id="project-progress"
                                     type="range"
                                     min="0"
                                     max="100"
@@ -176,6 +179,7 @@ const AdminProjectEditor = () => {
                             <label className="flex items-center gap-3 cursor-pointer group">
                                 <div className="relative">
                                     <input
+                                        id="project-is-featured"
                                         type="checkbox"
                                         checked={formData.is_featured}
                                         onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
@@ -184,7 +188,7 @@ const AdminProjectEditor = () => {
                                     <div className={`w-12 h-6 rounded-full transition-colors ${formData.is_featured ? 'bg-primary' : 'bg-gray-200'}`} />
                                     <div className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${formData.is_featured ? 'translate-x-6' : 'translate-x-0'}`} />
                                 </div>
-                                <span className="text-sm font-bold text-gray-700">Mettre en avant (Prioritaire)</span>
+                                <label htmlFor="project-is-featured" className="text-sm font-bold text-gray-700 cursor-pointer">Mettre en avant (Prioritaire)</label>
                             </label>
                         </div>
                     </div>

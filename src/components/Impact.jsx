@@ -42,7 +42,7 @@ const Impact = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-8">
                     {stats.map((stat, index) => (
                         <motion.div
-                            key={index}
+                            key={stat.label}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}

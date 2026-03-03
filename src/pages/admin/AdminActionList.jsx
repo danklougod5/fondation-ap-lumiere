@@ -82,6 +82,7 @@ const AdminActionList = () => {
                             className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-primary/20 outline-none"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
+                            aria-label="Rechercher une action"
                         />
                     </div>
                 </div>

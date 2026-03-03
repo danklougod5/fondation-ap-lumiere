@@ -63,8 +63,9 @@ const AdminLogin = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-gray-700 ml-1">Identifiant</label>
+                        <label htmlFor="admin-identifier" className="text-sm font-bold text-gray-700 ml-1">Identifiant</label>
                         <input
+                            id="admin-identifier"
                             type="text"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
@@ -75,9 +76,10 @@ const AdminLogin = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-gray-700 ml-1">Mot de passe</label>
+                        <label htmlFor="admin-password" className="text-sm font-bold text-gray-700 ml-1">Mot de passe</label>
                         <div className="relative">
                             <input
+                                id="admin-password"
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}

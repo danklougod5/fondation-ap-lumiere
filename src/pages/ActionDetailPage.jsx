@@ -17,31 +17,37 @@ import ActionCTA from '../components/action-detail/ActionCTA';
 import ActionVideo from '../components/action-detail/ActionVideo';
 
 // Images de démonstration pour la galerie
-const demoGalleryImages = [
-    { id: 1, image_url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800', title: 'Distribution de fournitures scolaires' },
-    { id: 2, image_url: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800', title: 'Activités éducatives' },
-    { id: 3, image_url: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800', title: 'Soutien aux communautés' },
-    { id: 4, image_url: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800', title: 'Aide humanitaire' },
-    { id: 5, image_url: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800', title: 'Actions de solidarité' },
-    { id: 6, image_url: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800', title: 'Moments de partage' }
-];
+const demoGalleryImages = [];
 
 const ActionDetailPage = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
-    const [action, setAction] = useState(null);
-    const [otherActions, setOtherActions] = useState([]);
-    const [galleryImages, setGalleryImages] = useState([]);
-    const [latestNews, setLatestNews] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [activeTab, setActiveTab] = useState('about');
+    const [state, setState] = useState({
+        action: null,
+        otherActions: [],
+        galleryImages: [],
+        latestNews: [],
+        loading: true,
+        selectedImage: null,
+        activeTab: 'about'
+    });
+
+    const {
+        action,
+        otherActions,
+        galleryImages,
+        latestNews,
+        loading,
+        selectedImage,
+        activeTab
+    } = state;
+
+    // Helper to update state
+    const updateState = (updates) => setState(prev => ({ ...prev, ...updates }));
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        fetchAction();
-        fetchOtherActions();
-        fetchLatestNews();
+        loadData();
     }, [slug]);
 
     useEffect(() => {
@@ -50,50 +56,60 @@ const ActionDetailPage = () => {
         }
     }, [action]);
 
-    const fetchAction = async () => {
+    const loadData = async () => {
         try {
-            setLoading(true);
-            const data = await cachedFetch(`action_detail_${slug}`, async () => {
-                const { data, error } = await supabase
-                    .from('actions')
-                    .select('*')
-                    .eq('slug', slug)
-                    .single();
-                if (error) throw error;
-                return data;
-            });
+            updateState({ loading: true });
 
-            if (!data) {
-                setAction(null);
-            } else {
-                setAction(data);
-            }
+            const [actionData, otherData, newsData] = await Promise.all([
+                fetchAction(),
+                fetchOtherActions(),
+                fetchLatestNews()
+            ]);
+
+            updateState({
+                action: actionData,
+                otherActions: otherData || [],
+                latestNews: newsData || [],
+                loading: false
+            });
         } catch (error) {
-            console.error('Fetch error:', error);
-            setAction(null);
-        } finally {
-            setLoading(false);
+            console.error('Data loading error:', error);
+            updateState({ loading: false });
         }
     };
 
-    const fetchOtherActions = async () => {
-        try {
-            const data = await cachedFetch(`action_other_${slug}`, async () => {
-                const { data, error } = await supabase
-                    .from('actions')
-                    .select('id, title, slug, icon, short_desc, image_url, video_url')
-                    .neq('slug', slug)
-                    .limit(3);
-                if (error) throw error;
-                return data || [];
-            });
+    const fetchAction = async () => {
+        return cachedFetch(`action_detail_${slug}`, async () => {
+            const { data, error } = await supabase
+                .from('actions')
+                .select('*')
+                .eq('slug', slug)
+                .single();
+            if (error) throw error;
+            return data;
+        });
+    };
 
-            if (data) {
-                setOtherActions(data);
-            }
-        } catch (error) {
-            console.error('Error fetching other actions:', error);
-        }
+    const fetchOtherActions = async () => {
+        return cachedFetch(`action_other_${slug}`, async () => {
+            const { data, error } = await supabase
+                .from('actions')
+                .select('id, title, slug, icon, short_desc, image_url, video_url')
+                .neq('slug', slug)
+                .limit(3);
+            if (error) throw error;
+            return data || [];
+        });
+    };
+
+    const fetchLatestNews = async () => {
+        const { data, error } = await supabase
+            .from('news')
+            .select('id, title, slug, image_url, created_at, summary, category')
+            .order('created_at', { ascending: false })
+            .limit(3);
+        if (error) throw error;
+        return data || [];
     };
 
     const fetchGalleryImages = async () => {
@@ -105,7 +121,7 @@ const ActionDetailPage = () => {
                     image_url: url,
                     title: `Moment capté - ${action.title}`
                 }));
-                setGalleryImages(formattedGallery);
+                updateState({ galleryImages: formattedGallery });
                 return;
             }
 
@@ -116,29 +132,13 @@ const ActionDetailPage = () => {
                 .limit(6);
 
             if (!error && data && data.length > 0) {
-                setGalleryImages(data);
+                updateState({ galleryImages: data });
             } else {
-                setGalleryImages(demoGalleryImages);
+                updateState({ galleryImages: demoGalleryImages });
             }
         } catch (error) {
             console.error('Error fetching gallery:', error);
-            setGalleryImages(demoGalleryImages);
-        }
-    };
-
-    const fetchLatestNews = async () => {
-        try {
-            const { data, error } = await supabase
-                .from('news')
-                .select('id, title, slug, image_url, created_at, summary, category')
-                .order('created_at', { ascending: false })
-                .limit(3);
-
-            if (!error && data) {
-                setLatestNews(data);
-            }
-        } catch (error) {
-            console.error('Error fetching news:', error);
+            updateState({ galleryImages: demoGalleryImages });
         }
     };
 
@@ -262,7 +262,7 @@ const ActionDetailPage = () => {
                     </div>
                 </nav>
 
-                <ActionTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+                <ActionTabs activeTab={activeTab} setActiveTab={(tab) => updateState({ activeTab: tab })} />
 
                 <ActionAbout action={action} />
 
@@ -273,7 +273,7 @@ const ActionDetailPage = () => {
                 <ActionGallery
                     galleryImages={galleryImages}
                     selectedImage={selectedImage}
-                    setSelectedImage={setSelectedImage}
+                    setSelectedImage={(img) => updateState({ selectedImage: img })}
                 />
 
                 <ActionNews latestNews={latestNews} />
