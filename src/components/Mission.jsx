@@ -1,5 +1,6 @@
 import React from 'react';
-import { Target, Users, BookOpen, HeartHandshake, Sparkles, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Users, BookOpen, HeartHandshake, Sparkles, ArrowRight, HandHeart } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Mission = () => {
@@ -23,7 +24,7 @@ const Mission = () => {
             color: "bg-emerald-500"
         },
         {
-            icon: Target,
+            icon: HandHeart,
             title: "Solidarité Active",
             desc: "Mobiliser nos donateurs pour apporter une aide financière directe aux familles précaires.",
             color: "bg-amber-500"
@@ -38,7 +39,7 @@ const Mission = () => {
                 <div className="absolute bottom-1/4 -left-24 w-80 h-80 bg-primary/5 rounded-full blur-[100px]"></div>
             </div>
 
-            <div className="container-custom relative z-10">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -58,37 +59,42 @@ const Mission = () => {
                     </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">
                     {objectives.map((obj, index) => (
-                        <motion.div
+                        <Link
+                            to="/actions"
                             key={obj.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="card-premium p-10 group flex flex-col h-full"
+                            className="block group"
                         >
-                            <div className="mb-8 relative">
-                                <div className={`absolute inset-0 ${obj.color} opacity-20 blur-2xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500`}></div>
-                                <div className="relative w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-800 group-hover:bg-primary group-hover:text-white transition-all duration-500 border border-slate-100 group-hover:border-primary group-hover:shadow-xl group-hover:shadow-primary/20">
-                                    <obj.icon size={28} />
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className="card-premium p-8 group flex flex-col h-full cursor-pointer hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500"
+                            >
+                                <div className="mb-6 relative" style={{ isolation: 'isolate' }}>
+                                    <div className={`absolute inset-0 ${obj.color} opacity-20 blur-2xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500`}></div>
+                                    <div className="relative w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-800 group-hover:bg-primary group-hover:text-white transition-all duration-500 border border-slate-100 group-hover:border-primary group-hover:shadow-xl group-hover:shadow-primary/20">
+                                        <obj.icon size={28} />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <h3 className="text-xl font-black text-slate-900 mb-4 leading-tight group-hover:text-primary transition-colors">
-                                {obj.title}
-                            </h3>
-                            <p className="text-slate-500 text-sm font-medium leading-relaxed mb-8 flex-grow">
-                                {obj.desc}
-                            </p>
+                                <h3 className="text-2xl font-black text-slate-900 mb-4 leading-tight group-hover:text-primary transition-colors">
+                                    {obj.title}
+                                </h3>
+                                <p className="text-slate-500 text-base font-medium leading-relaxed mb-10 flex-grow">
+                                    {obj.desc}
+                                </p>
 
-                            <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-primary transition-colors">Objectif 2030</span>
-                                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition-all">
-                                    <ArrowRight size={14} />
+                                <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-primary transition-colors">Objectif 2030</span>
+                                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition-all group-hover:translate-x-1 duration-300">
+                                        <ArrowRight size={18} />
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
             </div>
