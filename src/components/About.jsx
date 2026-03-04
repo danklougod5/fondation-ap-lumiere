@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, Quote, History, MapPin } from 'lucide-react';
+import { Quote, History, MapPin } from 'lucide-react';
 
 import { supabase } from '../lib/supabase';
-import SeamlessImage from './SeamlessImage';
 
 const About = () => {
     const [dynamicImages, setDynamicImages] = React.useState({
@@ -47,13 +46,18 @@ const About = () => {
                             transition={{ duration: 0.8 }}
                             className="relative"
                         >
-                            {/* Main Image Frame - Now Seamless */}
-                            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 h-[500px] lg:h-[600px]">
-                                <SeamlessImage
-                                    src={dynamicImages.main}
-                                    alt="Fondation AP Lumière d'Afrique Action"
-                                    className="transform hover:scale-105 transition-transform duration-700"
-                                />
+                            {/* Main Image Frame */}
+                            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 h-[500px] lg:h-[600px] bg-slate-200">
+                                {dynamicImages.main ? (
+                                    <img
+                                        src={dynamicImages.main}
+                                        alt="Fondation AP Lumière d'Afrique Action"
+                                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                                        loading="eager"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
+                                )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent pointer-events-none"></div>
                             </div>
 
@@ -63,11 +67,17 @@ const About = () => {
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                 className="absolute -bottom-10 -right-10 w-48 h-48 bg-white p-3 rounded-[2rem] shadow-2xl z-20 hidden md:block border border-slate-100"
                             >
-                                <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-50">
-                                    <SeamlessImage
-                                        src={dynamicImages.founder}
-                                        alt="Fondateur Apoutchou"
-                                    />
+                                <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-100">
+                                    {dynamicImages.founder ? (
+                                        <img
+                                            src={dynamicImages.founder}
+                                            alt="Fondateur Apoutchou"
+                                            className="w-full h-full object-cover"
+                                            loading="eager"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 animate-pulse" />
+                                    )}
                                 </div>
                             </motion.div>
 

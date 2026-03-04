@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Quote, Music, User, Globe, Heart, Award, Facebook, Instagram } from 'lucide-react';
-import Apoutchou from '../assets/Apoutchou.jpg';
 import SEO from '../components/SEO';
 
 import { supabase } from '../lib/supabase';
