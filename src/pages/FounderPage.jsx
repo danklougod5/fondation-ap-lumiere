@@ -29,7 +29,7 @@ const FounderPage = () => {
     }, []);
 
     return (
-        <div className="pt-24 bg-white">
+        <div className="bg-white">
             <SEO
                 title="Le Fondateur"
                 description="Découvrez le parcours de Stéphane Agbré (Apoutchou National), fondateur de la Fondation AP Lumière d'Afrique."
@@ -37,14 +37,6 @@ const FounderPage = () => {
             />
             {/* Hero Section */}
             <section className="relative h-[60vh] overflow-hidden bg-slate-900">
-                <div className="absolute inset-0 scale-110 blur-sm">
-                    <SeamlessImage
-                        src={dynamicProfile}
-                        fallback={Apoutchou}
-                        alt="Apoutchou National"
-                        className="opacity-50"
-                    />
-                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
 
                 <div className="container-custom relative h-full flex flex-col justify-end pb-12">
@@ -83,7 +75,6 @@ const FounderPage = () => {
                                     <div className="aspect-[3/4]">
                                         <SeamlessImage
                                             src={dynamicProfile}
-                                            fallback={Apoutchou}
                                             alt="Stéphane Agbré"
                                         />
                                     </div>

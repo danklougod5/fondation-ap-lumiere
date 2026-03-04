@@ -172,7 +172,7 @@ const NewsPage = () => {
                                         className="block h-full bg-white rounded-[3rem] shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-700 overflow-hidden border border-slate-100 flex flex-col hover:-translate-y-3"
                                     >
                                         {/* Image Container */}
-                                        <div className="relative h-72 overflow-hidden shrink-0 bg-slate-900">
+                                        <div className="relative h-64 md:h-72 overflow-hidden shrink-0 bg-slate-900">
                                             {item.image_url ? (
                                                 <img
                                                     src={item.image_url}
@@ -198,24 +198,24 @@ const NewsPage = () => {
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
                                             {/* Date Badge (Floating) */}
-                                            <div className="absolute top-6 left-6">
-                                                <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-2xl border border-white flex flex-col items-center group-hover:bg-primary transition-colors duration-500">
-                                                    <span className="text-2xl font-black text-slate-900 leading-none group-hover:text-white transition-colors">
+                                            <div className="absolute top-4 left-4 md:top-6 md:left-6">
+                                                <div className="bg-white/95 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-xl md:rounded-2xl shadow-2xl border border-white flex flex-col items-center group-hover:bg-primary transition-colors duration-500">
+                                                    <span className="text-lg md:text-2xl font-black text-slate-900 leading-none group-hover:text-white transition-colors">
                                                         {new Date(item.created_at).getDate()}
                                                     </span>
-                                                    <span className="text-[10px] font-black text-primary uppercase tracking-widest group-hover:text-white/80 transition-colors">
+                                                    <span className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest group-hover:text-white/80 transition-colors">
                                                         {new Date(item.created_at).toLocaleString('fr-FR', { month: 'short' })}
                                                     </span>
                                                 </div>
                                             </div>
 
                                             {/* Category Pin & Video Icon */}
-                                            <div className="absolute bottom-6 left-6 flex items-center gap-2">
-                                                <span className="bg-accent text-white text-[9px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl">
+                                            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex items-center gap-2">
+                                                <span className="bg-accent text-white text-[9px] font-black px-3 py-1.5 md:px-4 md:py-2 rounded-full uppercase tracking-widest shadow-xl">
                                                     {item.category || 'Actualité'}
                                                 </span>
                                                 {item.video_url && (
-                                                    <span className="bg-red-600 text-white text-[9px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl flex items-center gap-2">
+                                                    <span className="bg-red-600 text-white text-[9px] font-black px-3 py-1.5 md:px-4 md:py-2 rounded-full uppercase tracking-widest shadow-xl flex items-center gap-2">
                                                         <Play size={10} fill="currentColor" /> Vidéo
                                                     </span>
                                                 )}
@@ -223,26 +223,26 @@ const NewsPage = () => {
                                         </div>
 
                                         {/* Content */}
-                                        <div className="p-10 flex flex-col flex-grow">
-                                            <div className="flex items-center gap-4 text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] mb-6">
+                                        <div className="p-6 md:p-10 flex flex-col flex-grow">
+                                            <div className="flex items-center gap-4 text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] mb-4 md:mb-6">
                                                 <div className="flex items-center gap-2">
                                                     <Clock size={12} className="text-accent" />
                                                     <span>3 min de lecture</span>
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-xl md:text-2xl font-black text-slate-950 mb-6 group-hover:text-primary transition-colors leading-tight tracking-tighter line-clamp-2 overflow-hidden min-h-[3.5rem] md:min-h-[4rem]">
+                                            <h3 className="text-lg md:text-2xl font-black text-slate-950 mb-4 md:mb-6 group-hover:text-primary transition-colors leading-tight tracking-tighter line-clamp-2 overflow-hidden min-h-[3rem] md:min-h-[4rem]">
                                                 {item.title}
                                             </h3>
 
-                                            <p className="text-slate-500 font-medium leading-relaxed line-clamp-3 overflow-hidden mb-8 flex-grow italic">
+                                            <p className="text-slate-500 font-medium leading-relaxed line-clamp-3 overflow-hidden mb-6 md:mb-8 flex-grow italic text-sm md:text-base">
                                                 {item.summary}
                                             </p>
 
-                                            <div className="inline-flex items-center gap-4 text-primary font-black uppercase text-[10px] tracking-[0.2em] group/btn">
+                                            <div className="inline-flex items-center gap-3 md:gap-4 text-primary font-black uppercase text-[10px] tracking-[0.2em] group/btn mt-auto">
                                                 Explorer l'article
-                                                <div className="w-10 h-10 rounded-2xl border-2 border-primary/20 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary group-hover/btn:scale-110 transition-all duration-300">
-                                                    <ArrowRight size={16} className="group-hover/btn:text-white transition-colors" />
+                                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl md:rounded-2xl border-2 border-primary/20 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:border-primary group-hover/btn:scale-110 transition-all duration-300">
+                                                    <ArrowRight size={14} className="md:w-4 md:h-4 group-hover/btn:text-white transition-colors" />
                                                 </div>
                                             </div>
                                         </div>

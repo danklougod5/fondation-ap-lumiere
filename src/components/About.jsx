@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Apoutchou from '../assets/Apoutchou.jpg';
 import { motion } from 'framer-motion';
 import { Sparkles, Quote, History, MapPin } from 'lucide-react';
 
@@ -67,7 +66,6 @@ const About = () => {
                                 <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-50">
                                     <SeamlessImage
                                         src={dynamicImages.founder}
-                                        fallback={Apoutchou}
                                         alt="Fondateur Apoutchou"
                                     />
                                 </div>

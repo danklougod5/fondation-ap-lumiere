@@ -78,7 +78,7 @@ const ActionAbout = ({ action }) => {
                             >
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-2xl font-heading font-black text-slate-900">
-                                        Projets en cour
+                                        Projets en cours
                                     </h3>
                                     <div className="h-px bg-slate-100 flex-1 mx-6 hidden sm:block" />
                                 </div>
@@ -87,16 +87,20 @@ const ActionAbout = ({ action }) => {
                                     {action.upcoming_projects.map((project) => (
                                         <div
                                             key={project}
-                                            className="group relative p-6 bg-slate-50 rounded-3xl border border-transparent hover:border-accent/20 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300"
+                                            className="group relative p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:shadow-emerald-500/10 hover:border-emerald-500/20 transition-all duration-300"
                                         >
                                             <div className="flex items-center justify-between gap-4">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-accent group-hover:bg-accent group-hover:text-white transition-colors">
-                                                        <Target size={20} />
+                                                <div className="flex items-center gap-4 flex-1">
+                                                    <div className="w-12 h-12 shrink-0 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-emerald-500/30 group-hover:scale-110">
+                                                        <Target size={22} />
                                                     </div>
-                                                    <span className="font-bold text-slate-900 leading-tight">{project}</span>
+                                                    <span className="font-bold text-slate-800 leading-tight group-hover:text-emerald-700 transition-colors line-clamp-2">
+                                                        {project}
+                                                    </span>
                                                 </div>
-                                                <ArrowRight size={16} className="text-slate-300 group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                                                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-emerald-50 group-hover:translate-x-1 transition-all duration-300">
+                                                    <ArrowRight size={16} className="text-slate-400 group-hover:text-emerald-500" />
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
