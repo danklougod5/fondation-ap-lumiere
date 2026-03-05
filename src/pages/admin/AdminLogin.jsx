@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../lib/AuthContext';
+import logger from '../../lib/logger';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Eye, EyeOff, LogIn, AlertCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -26,7 +27,7 @@ const AdminLogin = () => {
             await signIn(email, password);
             navigate('/admin');
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             setError('Identifiants incorrects. Veuillez réessayer.');
         } finally {
             setIsLoading(false);

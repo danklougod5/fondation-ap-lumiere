@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
+import logger from '../../lib/logger';
 import { Newspaper, Heart, Users, ArrowUpRight, Target, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ const AdminDashboard = () => {
                 projectsCount: projectsCount || 0
             });
         } catch (error) {
-            console.error('Error fetching stats:', error);
+            logger.error('Error fetching stats:', error);
         } finally {
             setLoading(false);
         }

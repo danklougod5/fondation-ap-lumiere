@@ -8,7 +8,7 @@ import {
 import { supabase } from '../lib/supabase';
 import { cachedFetch } from '../lib/cache';
 import { motion } from 'framer-motion';
-import DOMPurify from 'dompurify';
+import logger from '../lib/logger';
 import SeamlessImage from './SeamlessImage';
 
 // Swiper imports
@@ -49,7 +49,7 @@ const Actions = () => {
 
             setActions(data);
         } catch (error) {
-            console.error('Error fetching actions:', error.message);
+            logger.error('Error fetching actions:', error.message);
         } finally {
             setLoading(false);
         }
@@ -236,32 +236,6 @@ const Actions = () => {
                 </div>
             </div>
 
-            <style dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(`
-                .swiper-custom-pagination-actions .swiper-pagination-bullet {
-                    width: 32px;
-                    height: 4px;
-                    background: #CBD5E1;
-                    opacity: 1;
-                    border-radius: 3px;
-                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                }
-                .swiper-custom-pagination-actions .swiper-pagination-bullet-active {
-                    background: linear-gradient(90deg, #0066CC 0%, #00C896 100%);
-                    width: 48px;
-                    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-                }
-                @media (max-width: 640px) {
-                    .swiper-custom-pagination-actions .swiper-pagination-bullet {
-                        width: 28px;
-                        height: 3px;
-                    }
-                    .swiper-custom-pagination-actions .swiper-pagination-bullet-active {
-                        width: 40px;
-                    }
-                }
-            `)
-            }} />
         </section>
     );
 };

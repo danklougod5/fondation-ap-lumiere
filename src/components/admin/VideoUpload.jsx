@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Upload, X, Loader2, Play, AlertCircle, Camera, RefreshCw } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import toast from 'react-hot-toast';
+import logger from '../../lib/logger';
 
 const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, className = "" }) => {
     const [uploading, setUploading] = useState(false);
@@ -124,7 +125,7 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
 
             toast.success("Vidéo téléchargée avec succès");
         } catch (error) {
-            console.error('Error uploading video:', error);
+            logger.error('Error uploading video:', error);
             setError(error.message);
             toast.error(error.message || "Erreur lors du téléchargement");
         } finally {

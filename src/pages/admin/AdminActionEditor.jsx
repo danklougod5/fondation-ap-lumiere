@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Save, Loader2, ArrowLeft, X, Plus, Trash } from 'lucide-react';
 import toast from 'react-hot-toast';
+import logger from '../../lib/logger';
 import ImageUpload from '../../components/admin/ImageUpload';
 import VideoUpload from '../../components/admin/VideoUpload';
 import RichTextEditor from '../../components/admin/RichTextEditor';
@@ -80,7 +81,7 @@ const AdminActionEditor = () => {
                 });
             }
         } catch (error) {
-            console.error('Error fetching action:', error);
+            logger.error('Error fetching action:', error);
             toast.error("Impossible de charger l'action");
         } finally {
             setLoading(false);
@@ -138,7 +139,7 @@ const AdminActionEditor = () => {
             navigate('/admin/actions');
 
         } catch (error) {
-            console.error('Error saving action:', error);
+            logger.error('Error saving action:', error);
             toast.error("Erreur lors de l'enregistrement");
         } finally {
             setLoading(false);

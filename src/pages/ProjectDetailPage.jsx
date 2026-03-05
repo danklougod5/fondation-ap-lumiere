@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 import { cachedFetch } from '../lib/cache';
+import logger from '../lib/logger';
 import { Target, ArrowLeft, Calendar, MapPin, Users, Heart, Share2, Loader2, CheckCircle2, Play } from 'lucide-react';
 
 import Footer from '../components/Footer';
@@ -48,7 +49,7 @@ const ProjectDetailPage = () => {
 
             updateState({ project: data, loading: false });
         } catch (error) {
-            console.error('Error fetching project:', error);
+            logger.error('Error fetching project:', error);
             updateState({ loading: false });
         }
     };

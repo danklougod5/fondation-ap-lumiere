@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import logger from '../lib/logger';
 import { cachedFetch } from '../lib/cache';
 import { Target, ArrowRight, Loader2, Sparkles, Sprout, Hammer } from 'lucide-react';
 import { OptimizedImage, OptimizedVideo } from './OptimizedMedia';
@@ -27,7 +28,7 @@ const Projects = () => {
 
             setProjects(data);
         } catch (error) {
-            console.error('Error fetching projects:', error.message);
+            logger.error('Error fetching projects:', error.message);
         } finally {
             setLoading(false);
         }

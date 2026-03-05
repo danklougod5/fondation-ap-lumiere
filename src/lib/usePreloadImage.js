@@ -33,9 +33,10 @@ export function preloadImage(url) {
  * @returns {Promise<Object>} { key: loadedUrl }
  */
 export async function preloadImages(imageMap) {
-    const results = {};
-    const promises = Object.entries(imageMap).map(async ([key, { url, fallback }]) => {
-        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+    const results = Object.create(null);
+    const allowedKeys = new Set(Object.keys(imageMap).filter(k => Object.hasOwn(imageMap, k)));
+    const promises = [...allowedKeys].map(async (key) => {
+        const { url, fallback } = imageMap[key];
         try {
             results[key] = await preloadImage(url);
         } catch {

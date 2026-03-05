@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
+import logger from '../../lib/logger';
 import { Link } from 'react-router-dom';
 import { Plus, Edit2, Trash2, Search, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -23,7 +24,7 @@ const AdminActionList = () => {
             if (error) throw error;
             setActions(data);
         } catch (error) {
-            console.error('Error fetching actions:', error);
+            logger.error('Error fetching actions:', error);
             toast.error("Erreur lors du chargement des actions");
         } finally {
             setLoading(false);
@@ -39,7 +40,7 @@ const AdminActionList = () => {
             setActions(actions.filter(item => item.id !== id));
             toast.success("Action supprimée avec succès");
         } catch (error) {
-            console.error('Error deleting action:', error);
+            logger.error('Error deleting action:', error);
             toast.error("Erreur lors de la suppression");
         }
     };

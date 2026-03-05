@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../lib/AuthContext';
+import logger from '../../lib/logger';
 import {
     LayoutDashboard, Newspaper, Heart, Settings, LogOut,
     Menu, X, Image as ImageIcon, Target
@@ -19,7 +20,7 @@ const AdminLayout = () => {
             await signOut();
             navigate('/admin/login');
         } catch (error) {
-            console.error("Erreur déconnexion:", error);
+            logger.error("Erreur déconnexion:", error);
         }
     };
 

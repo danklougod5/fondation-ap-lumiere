@@ -1,5 +1,4 @@
 import React from 'react';
-import DOMPurify from 'dompurify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -34,30 +33,6 @@ const RichTextEditor = ({ value, onChange, label, placeholder }) => {
                     className="bg-white"
                 />
             </div>
-            <style dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(`
-                .ql-toolbar.ql-snow {
-                    border: none !important;
-                    background: #f9fafb !important;
-                    border-bottom: 1px solid #e5e7eb !important;
-                    padding: 12px !important;
-                }
-                .ql-container.ql-snow {
-                    border: none !important;
-                    font-family: 'Inter', sans-serif !important;
-                    font-size: 16px !important;
-                    min-height: 200px;
-                }
-                .ql-editor {
-                    padding: 20px !important;
-                }
-                .ql-editor.ql-blank::before {
-                    left: 20px !important;
-                    color: #9ca3af !important;
-                    font-style: normal !important;
-                }
-            `)
-            }} />
         </div>
     );
 };

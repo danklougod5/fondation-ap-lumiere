@@ -241,3 +241,55 @@
 .rich-content blockquote {
     @apply border-l-4 border-accent pl-6 italic text-slate-500 my-8;
 }
+
+/* Swiper Custom Pagination - Actions */
+.swiper-custom-pagination-actions .swiper-pagination-bullet {
+    width: 32px;
+    height: 4px;
+    background: #CBD5E1;
+    opacity: 1;
+    border-radius: 3px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.swiper-custom-pagination-actions .swiper-pagination-bullet-active {
+    background: linear-gradient(90deg, #0066CC 0%, #00C896 100%);
+    width: 48px;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+@media (max-width: 640px) {
+    .swiper-custom-pagination-actions .swiper-pagination-bullet {
+        width: 28px;
+        height: 3px;
+    }
+
+    .swiper-custom-pagination-actions .swiper-pagination-bullet-active {
+        width: 40px;
+    }
+}
+
+/* Quill Editor Overrides */
+.ql-toolbar.ql-snow {
+    border: none !important;
+    background: #f9fafb !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    padding: 12px !important;
+}
+
+.ql-container.ql-snow {
+    border: none !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    min-height: 200px;
+}
+
+.ql-editor {
+    padding: 20px !important;
+}
+
+.ql-editor.ql-blank::before {
+    left: 20px !important;
+    color: #9ca3af !important;
+    font-style: normal !important;
+}

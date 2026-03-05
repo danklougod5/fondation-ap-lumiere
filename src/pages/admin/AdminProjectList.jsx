@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
+import logger from '../../lib/logger';
 import { Link } from 'react-router-dom';
 import { Plus, Edit2, Trash2, Search, Loader2, Target } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -23,7 +24,7 @@ const AdminProjectList = () => {
             if (error) throw error;
             setProjects(data || []);
         } catch (error) {
-            console.error('Error fetching projects:', error);
+            logger.error('Error fetching projects:', error);
             toast.error("Erreur lors du chargement des projets");
         } finally {
             setLoading(false);
@@ -39,7 +40,7 @@ const AdminProjectList = () => {
             setProjects(projects.filter(item => item.id !== id));
             toast.success("Projet supprimé avec succès");
         } catch (error) {
-            console.error('Error deleting project:', error);
+            logger.error('Error deleting project:', error);
             toast.error("Erreur lors de la suppression");
         }
     };

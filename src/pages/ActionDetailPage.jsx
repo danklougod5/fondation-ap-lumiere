@@ -4,6 +4,7 @@ import { ArrowLeft, Loader2, X, ChevronRight, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 import { cachedFetch } from '../lib/cache';
+import logger from '../lib/logger';
 import SEO from '../components/SEO';
 
 // Sub-components
@@ -73,7 +74,7 @@ const ActionDetailPage = () => {
                 loading: false
             });
         } catch (error) {
-            console.error('Data loading error:', error);
+            logger.error('Data loading error:', error);
             updateState({ loading: false });
         }
     };
@@ -137,7 +138,7 @@ const ActionDetailPage = () => {
                 updateState({ galleryImages: demoGalleryImages });
             }
         } catch (error) {
-            console.error('Error fetching gallery:', error);
+            logger.error('Error fetching gallery:', error);
             updateState({ galleryImages: demoGalleryImages });
         }
     };

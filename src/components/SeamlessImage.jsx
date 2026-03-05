@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import logger from '../lib/logger';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -31,19 +32,19 @@ const SeamlessImage = ({
             setIsLoaded(true);
         };
         img.onerror = () => {
-            console.error(`Failed to load image: ${src}`);
+            logger.error(`Failed to load image: ${src} `);
             setIsLoaded(false);
         };
     }, [src, fallback]);
 
     return (
-        <div className={`relative overflow-hidden ${wrapperClassName}`} style={{ width: '100%', height: '100%' }}>
+        <div className={`relative overflow - hidden ${wrapperClassName} `} style={{ width: '100%', height: '100%' }}>
             {/* 1. The Fallback Image (Always Present or Fading Out) */}
             {fallback && (
                 <img
                     src={fallback}
                     alt={alt}
-                    className={`${className} absolute inset-0 w-full h-full transition-opacity duration-1000 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+                    className={`${className} absolute inset - 0 w - full h - full transition - opacity duration - 1000 ${isLoaded ? 'opacity-0' : 'opacity-100'} `}
                     style={{ objectFit }}
                 />
             )}
@@ -56,7 +57,7 @@ const SeamlessImage = ({
                     transition={{ duration: 1 }}
                     src={currentSrc}
                     alt={alt}
-                    className={`${className} absolute inset-0 w-full h-full`}
+                    className={`${className} absolute inset - 0 w - full h - full`}
                     style={{ objectFit }}
                 />
             )}

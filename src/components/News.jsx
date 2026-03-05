@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '../lib/supabase';
+import logger from '../lib/logger';
 import { cachedFetch } from '../lib/cache';
 import { Link } from 'react-router-dom';
 import { Calendar, ArrowRight, Sparkles, User, ArrowUpRight, Play, Newspaper } from 'lucide-react';
@@ -28,7 +29,7 @@ const News = () => {
 
             setNewsItems(data);
         } catch (error) {
-            console.error('Error fetching news:', error.message);
+            logger.error('Error fetching news:', error.message);
         } finally {
             setLoading(false);
         }

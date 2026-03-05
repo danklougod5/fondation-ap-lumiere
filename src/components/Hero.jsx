@@ -4,6 +4,7 @@ import { ArrowRight, Heart, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { supabase } from '../lib/supabase';
+import logger from '../lib/logger';
 import { cachedFetch } from '../lib/cache';
 import SeamlessImage from './SeamlessImage';
 import SEO from './SEO';
@@ -29,7 +30,7 @@ const Hero = () => {
                     setDynamicBg(data.value);
                 }
             } catch (error) {
-                console.error("Hero background fetch error:", error);
+                logger.error("Hero background fetch error:", error);
             }
         };
         fetchBg();

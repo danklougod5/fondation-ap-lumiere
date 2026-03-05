@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, X, Loader2, Image as ImageIcon } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import logger from '../../lib/logger';
 
 const ImageUpload = ({ label, onUpload, currentImage, multiple = false, className = "" }) => {
     const [uploading, setUploading] = useState(false);
@@ -42,7 +43,7 @@ const ImageUpload = ({ label, onUpload, currentImage, multiple = false, classNam
                 onUpload(url);
             }
         } catch (error) {
-            console.error('Error uploading image:', error);
+            logger.error('Error uploading image:', error);
             alert('Erreur lors du téléchargement de l\'image. Vérifiez que le bucket "images" existe dans Supabase Storage et est public.');
         } finally {
             setUploading(false);

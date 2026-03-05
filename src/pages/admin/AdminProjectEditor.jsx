@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Save, Loader2, ArrowLeft, Target, Layout } from 'lucide-react';
 import toast from 'react-hot-toast';
+import logger from '../../lib/logger';
 import ImageUpload from '../../components/admin/ImageUpload';
 import VideoUpload from '../../components/admin/VideoUpload';
 import RichTextEditor from '../../components/admin/RichTextEditor';
@@ -51,7 +52,7 @@ const AdminProjectEditor = () => {
                 });
             }
         } catch (error) {
-            console.error('Error fetching project:', error);
+            logger.error('Error fetching project:', error);
             toast.error("Impossible de charger le projet");
         } finally {
             setLoading(false);
@@ -93,7 +94,7 @@ const AdminProjectEditor = () => {
             navigate('/admin/projects');
 
         } catch (error) {
-            console.error('Error saving project:', error);
+            logger.error('Error saving project:', error);
             toast.error("Erreur lors de l'enregistrement");
         } finally {
             setLoading(false);

@@ -6,6 +6,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 import { cachedFetch } from '../lib/cache';
+import logger from '../lib/logger';
 import SEO from '../components/SEO';
 
 // Sub-components
@@ -54,7 +55,7 @@ const NewsDetailPage = () => {
                 setNews(data);
             }
         } catch (error) {
-            console.error('Fetch error:', error);
+            logger.error('Fetch error:', error);
             setNews(null);
         } finally {
             setLoading(false);
@@ -78,7 +79,7 @@ const NewsDetailPage = () => {
                 setOtherNews(data);
             }
         } catch (error) {
-            console.error('Error fetching other news:', error);
+            logger.error('Error fetching other news:', error);
         }
     };
 

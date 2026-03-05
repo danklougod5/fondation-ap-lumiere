@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
+import logger from '../../lib/logger';
 import { Link } from 'react-router-dom';
 import { Plus, Edit2, Trash2, Search, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -23,7 +24,7 @@ const AdminNewsList = () => {
             if (error) throw error;
             setNews(data);
         } catch (error) {
-            console.error('Error fetching news:', error);
+            logger.error('Error fetching news:', error);
             toast.error("Erreur lors du chargement des actualités");
         } finally {
             setLoading(false);
@@ -39,7 +40,7 @@ const AdminNewsList = () => {
             setNews(news.filter(item => item.id !== id));
             toast.success("Article supprimé avec succès");
         } catch (error) {
-            console.error('Error deleting news:', error);
+            logger.error('Error deleting news:', error);
             toast.error("Erreur lors de la suppression");
         }
     };

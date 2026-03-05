@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Save, Loader2, Sparkles, Image as ImageIcon, Info } from 'lucide-react';
 import toast from 'react-hot-toast';
+import logger from '../../lib/logger';
 import ImageUpload from '../../components/admin/ImageUpload';
 
 const AdminSiteSettings = () => {
@@ -35,16 +36,16 @@ const AdminSiteSettings = () => {
             }
 
             if (data) {
-                const settingsMap = {};
+                const settingsMap = Object.create(null);
                 data.forEach(item => {
-                    if (item.key !== '__proto__' && item.key !== 'constructor' && item.key !== 'prototype') {
+                    if (Object.hasOwn(item, 'key') && typeof item.key === 'string') {
                         settingsMap[item.key] = item.value;
                     }
                 });
                 setSettings(prev => ({ ...prev, ...settingsMap }));
             }
         } catch (error) {
-            console.error('Error fetching settings:', error);
+            logger.error('Error fetching settings:', error);
             toast.error("Impossible de charger les paramètres");
         } finally {
             setLoading(false);
@@ -70,7 +71,7 @@ const AdminSiteSettings = () => {
             if (error) throw error;
             toast.success("Paramètres mis à jour avec succès");
         } catch (error) {
-            console.error('Error saving settings:', error);
+            logger.error('Error saving settings:', error);
             toast.error("Erreur lors de l'enregistrement");
         } finally {
             setSaving(false);

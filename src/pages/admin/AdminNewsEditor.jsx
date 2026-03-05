@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Save, Loader2, ArrowLeft, X } from 'lucide-react';
 import toast from 'react-hot-toast';
+import logger from '../../lib/logger';
 
 import NewsBasicInfo from '../../components/admin/news-editor/NewsBasicInfo';
 import NewsMediaSection from '../../components/admin/news-editor/NewsMediaSection';
@@ -55,7 +56,7 @@ const AdminNewsEditor = () => {
                 });
             }
         } catch (error) {
-            console.error('Error fetching news:', error);
+            logger.error('Error fetching news:', error);
             toast.error("Impossible de charger l'article");
         } finally {
             setLoading(false);
@@ -105,7 +106,7 @@ const AdminNewsEditor = () => {
             navigate('/admin/news');
 
         } catch (error) {
-            console.error('Error saving news:', error);
+            logger.error('Error saving news:', error);
             toast.error("Erreur lors de l'enregistrement");
         } finally {
             setLoading(false);
