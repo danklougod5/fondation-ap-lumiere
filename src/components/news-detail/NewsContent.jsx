@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import DOMPurify from 'dompurify';
 import { Facebook, Twitter, Linkedin, Copy, Check, Play } from 'lucide-react';
 
 const NewsContent = ({
@@ -17,7 +18,7 @@ const NewsContent = ({
                     {news.content ? (
                         <div
                             className="text-slate-600 text-lg md:text-xl leading-[1.8] font-medium rich-content prose prose-lg prose-slate max-w-none"
-                            dangerouslySetInnerHTML={{ __html: news.content }}
+                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(news.content) }}
                         />
                     ) : (
                         <p className="text-gray-400 italic">Contenu non disponible.</p>

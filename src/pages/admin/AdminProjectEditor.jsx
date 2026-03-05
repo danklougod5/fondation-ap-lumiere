@@ -63,7 +63,7 @@ const AdminProjectEditor = () => {
             .toLowerCase()
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             .replace(/[^a-z0-9]+/g, '-')
-            .replace(/(^-|-$)+/g, '');
+            .replace(/^-+|-+$/g, '');
         setFormData({ ...formData, slug });
     };
 
@@ -169,7 +169,7 @@ const AdminProjectEditor = () => {
                                     min="0"
                                     max="100"
                                     value={formData.progress}
-                                    onChange={(e) => setFormData({ ...formData, progress: parseInt(e.target.value) })}
+                                    onChange={(e) => setFormData({ ...formData, progress: parseInt(e.target.value, 10) })}
                                     className="flex-1 accent-emerald-500"
                                 />
                                 <span className="font-bold text-emerald-500 w-12">{formData.progress}%</span>

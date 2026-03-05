@@ -8,6 +8,7 @@ import {
 import { supabase } from '../lib/supabase';
 import { cachedFetch } from '../lib/cache';
 import { motion } from 'framer-motion';
+import DOMPurify from 'dompurify';
 import SeamlessImage from './SeamlessImage';
 
 // Swiper imports
@@ -236,7 +237,7 @@ const Actions = () => {
             </div>
 
             <style dangerouslySetInnerHTML={{
-                __html: `
+                __html: DOMPurify.sanitize(`
                 .swiper-custom-pagination-actions .swiper-pagination-bullet {
                     width: 32px;
                     height: 4px;
@@ -259,7 +260,8 @@ const Actions = () => {
                         width: 40px;
                     }
                 }
-            `}} />
+            `)
+            }} />
         </section>
     );
 };

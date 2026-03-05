@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import DOMPurify from 'dompurify';
 import { Target, Play } from 'lucide-react';
 
 const ProjectContent = ({ project, isVideoFile, getEmbedUrl }) => {
@@ -17,7 +18,7 @@ const ProjectContent = ({ project, isVideoFile, getEmbedUrl }) => {
                 </div>
                 <div className="prose prose-lg prose-slate max-w-none text-slate-600 font-medium leading-relaxed">
                     {project.description ? (
-                        <div dangerouslySetInnerHTML={{ __html: project.description }} />
+                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(project.description) }} />
                     ) : (
                         <p className="italic text-slate-400">Aucune description disponible.</p>
                     )}

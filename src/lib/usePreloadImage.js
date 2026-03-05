@@ -35,6 +35,7 @@ export function preloadImage(url) {
 export async function preloadImages(imageMap) {
     const results = {};
     const promises = Object.entries(imageMap).map(async ([key, { url, fallback }]) => {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
         try {
             results[key] = await preloadImage(url);
         } catch {

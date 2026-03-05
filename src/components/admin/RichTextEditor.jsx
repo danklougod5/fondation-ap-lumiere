@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -34,7 +35,7 @@ const RichTextEditor = ({ value, onChange, label, placeholder }) => {
                 />
             </div>
             <style dangerouslySetInnerHTML={{
-                __html: `
+                __html: DOMPurify.sanitize(`
                 .ql-toolbar.ql-snow {
                     border: none !important;
                     background: #f9fafb !important;
@@ -55,7 +56,8 @@ const RichTextEditor = ({ value, onChange, label, placeholder }) => {
                     color: #9ca3af !important;
                     font-style: normal !important;
                 }
-            ` }} />
+            `)
+            }} />
         </div>
     );
 };

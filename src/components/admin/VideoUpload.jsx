@@ -42,7 +42,7 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
                         return;
                     }
                     const file = new File([blob], "thumbnail.jpg", { type: "image/jpeg" });
-                    const fileName = `thumb-${Math.random().toString(36).substring(2)}.jpg`;
+                    const fileName = `thumb-${crypto.randomUUID()}.jpg`;
                     const filePath = `public/${fileName}`;
 
                     const { error: uploadError } = await supabase.storage
@@ -95,7 +95,7 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
 
         try {
             const fileExt = file.name.split('.').pop();
-            const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+            const fileName = `${crypto.randomUUID()}.${fileExt}`;
             const filePath = `news/${fileName}`;
 
             const { error: uploadError } = await supabase.storage
@@ -155,7 +155,7 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
                                     aria-label="Minutes de la capture d'écran"
                                     value={Math.floor(screenshotTime / 60)}
                                     onChange={(e) => {
-                                        const val = parseInt(e.target.value) || 0;
+                                        const val = parseInt(e.target.value, 10) || 0;
                                         const currentSec = screenshotTime % 60;
                                         const newTime = val * 60 + currentSec;
                                         setScreenshotTime(newTime);
@@ -175,7 +175,7 @@ const VideoUpload = ({ label, onUpload, onScreenshot, currentVideo, hasImage, cl
                                     aria-label="Secondes de la capture d'écran"
                                     value={screenshotTime % 60}
                                     onChange={(e) => {
-                                        const val = parseInt(e.target.value) || 0;
+                                        const val = parseInt(e.target.value, 10) || 0;
                                         const currentMin = Math.floor(screenshotTime / 60);
                                         const newTime = currentMin * 60 + val;
                                         setScreenshotTime(newTime);

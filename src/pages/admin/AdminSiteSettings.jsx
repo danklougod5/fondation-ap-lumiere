@@ -37,7 +37,9 @@ const AdminSiteSettings = () => {
             if (data) {
                 const settingsMap = {};
                 data.forEach(item => {
-                    settingsMap[item.key] = item.value;
+                    if (item.key !== '__proto__' && item.key !== 'constructor' && item.key !== 'prototype') {
+                        settingsMap[item.key] = item.value;
+                    }
                 });
                 setSettings(prev => ({ ...prev, ...settingsMap }));
             }

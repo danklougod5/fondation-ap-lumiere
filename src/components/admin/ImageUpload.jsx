@@ -19,7 +19,7 @@ const ImageUpload = ({ label, onUpload, currentImage, multiple = false, classNam
         try {
             const uploadPromises = acceptedFiles.map(async (file) => {
                 const fileExt = file.name.split('.').pop();
-                const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+                const fileName = `${crypto.randomUUID()}.${fileExt}`;
                 const filePath = `public/${fileName}`;
 
                 const { error: uploadError } = await supabase.storage

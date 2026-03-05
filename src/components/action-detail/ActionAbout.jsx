@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import DOMPurify from 'dompurify';
 import { Users, Rocket, MapPin, Target, CheckCircle2, Calendar, ArrowRight, Activity, Quote } from 'lucide-react';
 import { staggerContainer, scaleIn } from './animations';
 
@@ -38,7 +39,7 @@ const ActionAbout = ({ action }) => {
                                     {action.description ? (
                                         <div
                                             className="text-slate-600 leading-[1.8] font-medium rich-content"
-                                            dangerouslySetInnerHTML={{ __html: action.description }}
+                                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(action.description) }}
                                         />
                                     ) : (
                                         <p className="text-slate-400 italic">

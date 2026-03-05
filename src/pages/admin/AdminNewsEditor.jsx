@@ -67,7 +67,7 @@ const AdminNewsEditor = () => {
             .toLowerCase()
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove accents
             .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with dashes
-            .replace(/(^-|-$)+/g, ''); // remove leading/trailing dashes
+            .replace(/^-+|-+$/g, ''); // remove leading/trailing dashes
         setFormData({ ...formData, slug });
     };
 
