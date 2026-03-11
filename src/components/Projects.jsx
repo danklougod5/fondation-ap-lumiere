@@ -6,6 +6,7 @@ import logger from '../lib/logger';
 import { cachedFetch } from '../lib/cache';
 import { Target, ArrowRight, Loader2, Sparkles, Sprout, Hammer } from 'lucide-react';
 import { OptimizedImage, OptimizedVideo } from './OptimizedMedia';
+import projectFallback from '../assets/FormationApf.jpg';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -47,8 +48,9 @@ const Projects = () => {
             <div className="lg:w-1/2 relative overflow-hidden h-64 lg:h-auto bg-slate-800">
                 {project.image_url ? (
                     <OptimizedImage
-                        src={project.image_url}
+                        src={project.image_url || projectFallback}
                         alt={project.title}
+                        fallbackSrc={projectFallback}
                         className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-1000"
                     />
                 ) : project.video_url ? (
@@ -126,8 +128,9 @@ const Projects = () => {
                 <div className="relative h-64 overflow-hidden shrink-0 bg-slate-800">
                     {project.image_url ? (
                         <OptimizedImage
-                            src={project.image_url}
+                            src={project.image_url || projectFallback}
                             alt={project.title}
+                            fallbackSrc={projectFallback}
                             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000"
                         />
                     ) : project.video_url ? (

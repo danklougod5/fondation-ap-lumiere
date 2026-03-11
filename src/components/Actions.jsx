@@ -10,6 +10,7 @@ import { cachedFetch } from '../lib/cache';
 import { motion } from 'framer-motion';
 import logger from '../lib/logger';
 import SeamlessImage from './SeamlessImage';
+import actionFallback from '../assets/DonApf.jpg';
 
 // Swiper imports
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -149,7 +150,7 @@ const Actions = () => {
                                             <div className="absolute inset-0">
                                                 <SeamlessImage
                                                     src={action.image_url}
-                                                    fallback={null}
+                                                    fallback={actionFallback}
                                                     alt={action.title}
                                                     className="transition-transform duration-1000 group-hover:scale-110 group-active:scale-105"
                                                 />

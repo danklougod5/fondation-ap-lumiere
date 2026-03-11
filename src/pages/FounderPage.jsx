@@ -5,6 +5,7 @@ import SEO from '../components/SEO';
 
 import { supabase } from '../lib/supabase';
 import SeamlessImage from '../components/SeamlessImage';
+import founderFallback from '../assets/Apoutchou.jpg';
 
 const FounderPage = () => {
     const [dynamicProfile, setDynamicProfile] = React.useState(null);
@@ -74,6 +75,7 @@ const FounderPage = () => {
                                     <div className="aspect-[3/4]">
                                         <SeamlessImage
                                             src={dynamicProfile}
+                                            fallback={founderFallback}
                                             alt="Stéphane Agbré"
                                         />
                                     </div>

@@ -8,6 +8,7 @@ import logger from '../lib/logger';
 import { cachedFetch } from '../lib/cache';
 import SeamlessImage from './SeamlessImage';
 import SEO from './SEO';
+import heroFallback from '../assets/imageFonAp.jpg';
 
 
 const Hero = () => {
@@ -54,7 +55,7 @@ const Hero = () => {
                     >
                         <SeamlessImage
                             src={dynamicBg}
-                            fallback={null}
+                            fallback={heroFallback}
                             alt="Enfants en Afrique"
                         />
                     </motion.div>
